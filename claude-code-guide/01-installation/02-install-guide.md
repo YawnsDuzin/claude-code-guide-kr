@@ -152,11 +152,60 @@ claude --version
 
 ---
 
-## Windows (WSL2) 설치
+## Windows 설치
 
-Claude Code는 Windows에서 직접 실행되지 않습니다. **WSL2(Windows Subsystem for Linux 2)**를 통해 Linux 환경에서 사용해야 합니다.
+Windows에서는 두 가지 방법으로 Claude Code를 설치할 수 있습니다.
 
-### 1단계: WSL2 설치
+### Option 1: Native Windows + Git Bash (WSL 없이 가능, 권장)
+
+Git for Windows를 설치한 뒤, PowerShell이나 CMD에서 설치 명령을 실행하면 됩니다. Claude Code는 내부적으로 Git Bash를 사용하여 명령을 실행하며, **PowerShell을 관리자 권한으로 실행할 필요가 없습니다**.
+
+#### 1단계: Git for Windows 설치
+
+[git-scm.com](https://git-scm.com/download/win)에서 Git for Windows를 다운로드하여 설치합니다. 설치 시 기본 옵션을 그대로 사용하면 됩니다.
+
+```powershell
+# 설치 확인
+git --version
+```
+
+#### 2단계: Node.js 설치
+
+[nodejs.org](https://nodejs.org)에서 Node.js 20 LTS를 다운로드하여 설치합니다.
+
+```powershell
+# 설치 확인
+node --version   # v20.x.x 이상이면 OK
+npm --version
+```
+
+#### 3단계: Claude Code 설치
+
+PowerShell 또는 CMD에서 실행합니다 (관리자 권한 불필요):
+
+```powershell
+npm install -g @anthropic-ai/claude-code
+```
+
+#### 4단계: 설치 확인
+
+```powershell
+claude --version
+```
+
+#### Native Windows 참고사항
+
+- **Git Bash 자동 사용**: Claude Code가 내부적으로 Git Bash를 통해 셸 명령을 실행합니다
+- **관리자 권한 불필요**: 일반 사용자 권한으로 설치 및 실행이 가능합니다
+- **VS Code 연동**: VS Code에서 바로 Claude Code 확장을 사용할 수 있습니다
+
+---
+
+### Option 2: WSL2를 통한 설치
+
+WSL2를 사용하면 완전한 Linux 환경에서 Claude Code를 실행할 수 있습니다.
+
+#### 1단계: WSL2 설치
 
 PowerShell을 **관리자 권한**으로 열고 실행합니다:
 
@@ -169,7 +218,7 @@ wsl --install
 
 재시작 후 WSL Ubuntu 터미널이 자동으로 열리며, Linux 사용자 이름과 비밀번호를 설정합니다.
 
-### 2단계: WSL2 내에서 Node.js 설치
+#### 2단계: WSL2 내에서 Node.js 설치
 
 WSL Ubuntu 터미널에서 실행합니다:
 
@@ -191,7 +240,7 @@ node --version
 npm --version
 ```
 
-### 3단계: Claude Code 설치
+#### 3단계: Claude Code 설치
 
 WSL 터미널에서 실행합니다:
 
@@ -199,13 +248,13 @@ WSL 터미널에서 실행합니다:
 npm install -g @anthropic-ai/claude-code
 ```
 
-### 4단계: 설치 확인
+#### 4단계: 설치 확인
 
 ```bash
 claude --version
 ```
 
-### WSL2 관련 참고사항
+#### WSL2 관련 참고사항
 
 - **Windows 터미널 사용 권장**: Windows Terminal(Microsoft Store에서 설치)을 사용하면 WSL 환경이 더 쾌적합니다
 - **파일 시스템 성능**: WSL 내부 파일 시스템(`/home/username/`)에서 프로젝트를 관리하세요. Windows 파일 시스템(`/mnt/c/`)에서 작업하면 I/O 성능이 크게 저하됩니다

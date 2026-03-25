@@ -13,9 +13,9 @@ Claude Code는 다음 운영체제를 지원합니다:
 | **macOS** | 10.15 (Catalina) 이상 | Intel 및 Apple Silicon(M1/M2/M3/M4) 모두 지원 |
 | **Ubuntu** | 20.04 LTS 이상 | 가장 많이 테스트된 Linux 배포판 |
 | **Debian** | 10 (Buster) 이상 | Ubuntu와 동일한 방식으로 설치 |
-| **Windows** | WSL2를 통한 사용 | 네이티브 Windows는 지원하지 않음 |
+| **Windows** | Windows 10 이상 | Native (Git Bash) 또는 WSL2 사용 가능 |
 
-> **주의**: Windows 사용자는 반드시 **WSL2(Windows Subsystem for Linux 2)**를 통해 사용해야 합니다. PowerShell이나 CMD에서는 직접 실행할 수 없습니다. WSL2 설정 방법은 [설치 가이드](./install-guide.md)에서 자세히 설명합니다.
+> **참고**: Windows에서는 두 가지 방법으로 사용할 수 있습니다: (1) **Git for Windows + Git Bash** (WSL 없이 가능), (2) **WSL2** (Linux 환경). 자세한 설치 방법은 [설치 가이드](./install-guide.md)를 참조하세요.
 
 ### OS 버전 확인 방법
 
@@ -146,13 +146,35 @@ echo 'export HTTPS_PROXY=http://proxy.company.com:8080' >> ~/.bashrc
 
 Claude Code를 사용하려면 다음 중 하나의 인증 수단이 필요합니다:
 
-### 옵션 1: Anthropic API 키
+### 옵션 1: Claude 구독 (OAuth 로그인)
+
+Claude Free/Pro 구독으로도 Claude Code를 사용할 수 있습니다.
+
+| 접근 방식 | Free | Pro | Max |
+|-----------|:----:|:---:|:---:|
+| Terminal CLI | ✅ | ✅ | ✅ |
+| VS Code 확장 | ✅ | ✅ | ✅ |
+| Desktop 앱 | ❌ | ✅ | ✅ |
+| Web (claude.ai/code) | ❌ | ✅ | ✅ |
+
+**핵심 포인트:**
+1. **무료 사용자**: Terminal CLI와 VS Code 확장에서 사용 가능
+2. **Pro 구독자** ($20/월): 모든 기능 사용 가능 (Desktop, Web 포함)
+3. **Max 구독자**: Pro의 모든 기능 + 더 높은 사용량 제한
+
+구독 플랜을 사용하면 API 키 없이 **OAuth 로그인**으로 인증할 수 있습니다. 첫 실행 시 브라우저가 열리며 로그인 과정을 안내합니다.
+
+> Claude Pro 구독이 있으면 별도 API 비용 없이 Claude Code를 사용할 수 있습니다.
+
+### 옵션 2: Anthropic API 키
+
+Claude 구독과 별개로 API 키로도 사용 가능합니다. 이 경우 토큰당 비용이 청구되며, 평균 $100-200/월 정도입니다.
 
 | 항목 | 내용 |
 |------|------|
 | **발급 방법** | [console.anthropic.com](https://console.anthropic.com)에서 발급 |
-| **비용** | 사용량 기반 과금 (토큰당 비용) |
-| **적합한 사용자** | 개인 개발자, 사용량을 직접 관리하고 싶은 경우 |
+| **비용** | 사용량 기반 과금 (토큰당 비용, 평균 $100-200/월) |
+| **적합한 사용자** | 사용량을 직접 관리하고 싶은 경우, 구독 없이 사용하려는 경우 |
 
 ```bash
 # API 키 설정 방법
@@ -164,17 +186,6 @@ source ~/.bashrc
 ```
 
 > **보안 주의**: API 키는 절대 Git에 커밋하거나 공개 저장소에 노출하지 마세요. `.bashrc` 파일 권한을 `600`으로 설정하는 것을 권장합니다.
-
-### 옵션 2: Claude 구독 (OAuth 로그인)
-
-| 구독 플랜 | Claude Code 사용 | 설명 |
-|-----------|-------------------|------|
-| **Claude Max** | 가능 | 개인 사용자용 구독 플랜 |
-| **Claude Team** | 가능 | 소규모 팀용 구독 플랜 |
-| **Claude Enterprise** | 가능 | 대규모 조직용 구독 플랜 |
-| Claude Free / Pro | 불가 | Claude Code 미포함 |
-
-구독 플랜을 사용하면 API 키 없이 **OAuth 로그인**으로 인증할 수 있습니다. 첫 실행 시 브라우저가 열리며 로그인 과정을 안내합니다.
 
 ---
 
@@ -190,7 +201,7 @@ source ~/.bashrc
 [ ] 디스크 여유 공간 1GB 이상
 [ ] 인터넷 연결 가능
 [ ] api.anthropic.com 접근 가능
-[ ] Anthropic API 키 또는 Claude 구독(Max/Team/Enterprise) 보유
+[ ] Anthropic API 키 또는 Claude 구독(Free/Pro/Max/Team/Enterprise) 보유
 ```
 
 ### 빠른 확인 스크립트
