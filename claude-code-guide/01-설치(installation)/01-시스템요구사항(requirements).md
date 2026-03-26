@@ -15,7 +15,7 @@ Claude Code는 다음 운영체제를 지원합니다:
 | **Debian** | 10 (Buster) 이상 | Ubuntu와 동일한 방식으로 설치 |
 | **Windows** | Windows 10 이상 | Native (Git Bash) 또는 WSL2 사용 가능 |
 
-> **참고**: Windows에서는 두 가지 방법으로 사용할 수 있습니다: (1) **Git for Windows + Git Bash** (WSL 없이 가능), (2) **WSL2** (Linux 환경). 자세한 설치 방법은 [설치 가이드](./install-guide.md)를 참조하세요.
+> **참고**: Windows에서는 두 가지 방법으로 사용할 수 있습니다: (1) **Git for Windows + Git Bash** (WSL 없이 가능), (2) **WSL2** (Linux 환경). 자세한 설치 방법은 [설치 가이드](./02-설치가이드(install-guide).md)를 참조하세요.
 
 ### OS 버전 확인 방법
 
@@ -58,7 +58,7 @@ npm --version
 
 ### Node.js가 설치되어 있지 않다면
 
-Node.js가 없거나 버전이 낮다면, [설치 가이드](./install-guide.md)에서 OS별 설치 방법을 참고하세요. 간단한 요약:
+Node.js가 없거나 버전이 낮다면, [설치 가이드](./02-설치가이드(install-guide).md)에서 OS별 설치 방법을 참고하세요. 간단한 요약:
 
 ```bash
 # macOS (Homebrew 사용)
@@ -241,4 +241,4 @@ echo "=== 확인 완료 ==="
 
 모든 요구사항을 충족했다면 설치를 진행합니다.
 
-→ [OS별 설치 가이드](./install-guide.md)
+→ [OS별 설치 가이드](./02-설치가이드(install-guide).md)

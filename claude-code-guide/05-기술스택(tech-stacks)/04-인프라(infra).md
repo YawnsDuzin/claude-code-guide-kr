@@ -504,4 +504,4 @@ jobs:
 | Docker 최적화 | "이 Docker 이미지 크기를 줄여줘" 요청 |
 | CI/CD 실패 | 에러 로그 전체를 Claude에게 붙여넣기 |
 
-> **다음 단계:** [비교 가이드](../06-comparison/01-vs-github-copilot.md)로 이동하여 다른 도구와의 비교를 확인하세요.
+> **다음 단계:** [비교 가이드](../06-비교(comparison)/01-GitHub-Copilot비교(vs-github-copilot).md)로 이동하여 다른 도구와의 비교를 확인하세요.

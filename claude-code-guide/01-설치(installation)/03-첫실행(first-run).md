@@ -424,6 +424,6 @@ export ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxx
 
 첫 실행을 완료했다면 다음 문서로 진행하세요:
 
-- → [Claude Code의 동작 원리](../02-core-concepts/how-claude-code-works.md) - Claude Code가 내부적으로 어떻게 작동하는지 이해하기
-- → [컨텍스트와 메모리](../02-core-concepts/context-and-memory.md) - 효율적인 대화 관리법
-- → [코드 편집 기능](../03-features/code-editing.md) - 멀티 파일 편집 활용하기
+- → [Claude Code의 동작 원리](../02-핵심개념(core-concepts)/02-도구시스템(tools).md) - Claude Code가 내부적으로 어떻게 작동하는지 이해하기
+- → [컨텍스트와 메모리](../02-핵심개념(core-concepts)/04-컨텍스트관리(context-management).md) - 효율적인 대화 관리법
+- → [코드 편집 기능](../03-주요기능(features)/01-메모리(memory).md) - 멀티 파일 편집 활용하기

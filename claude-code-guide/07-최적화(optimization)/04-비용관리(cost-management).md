@@ -207,4 +207,4 @@ claude --max-budget-usd 5.00
 - [ ] 프롬프트가 구체적이고 집중적인가?
 - [ ] --max-budget-usd로 예산 제한을 설정했는가?
 
-> **다음 단계:** [CLI 레퍼런스](../99-appendix/01-cli-reference.md)에서 모든 명령어를 확인하세요.
+> **다음 단계:** [CLI 레퍼런스](../99-부록(appendix)/01-CLI레퍼런스(cli-reference).md)에서 모든 명령어를 확인하세요.
