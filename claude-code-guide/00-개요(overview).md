@@ -164,6 +164,6 @@ claude-code-guide/
 
 설치를 시작할 준비가 되셨나요?
 
-→ [시스템 요구사항 확인하기](./01-installation/requirements.md)
-→ [설치 가이드](./01-installation/install-guide.md)
-→ [첫 실행 및 초기 설정](./01-installation/first-run.md)
+→ [시스템 요구사항 확인하기](./01-설치(installation)/01-시스템요구사항(requirements).md)
+→ [설치 가이드](./01-설치(installation)/02-설치가이드(install-guide).md)
+→ [첫 실행 및 초기 설정](./01-설치(installation)/03-첫실행(first-run).md)

@@ -28,6 +28,7 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 - [MCP 서버](./03-주요기능(features)/04-MCP서버(mcp-servers).md) - 외부 도구 연동, MCP 설정
 - [서브에이전트](./03-주요기능(features)/05-서브에이전트(subagents).md) - 병렬 처리, 멀티 에이전트
 - [IDE 통합](./03-주요기능(features)/06-IDE통합(ide-integration).md) - VS Code, JetBrains 연동
+- [Web & Desktop](./03-주요기능(features)/07-웹데스크톱(web-desktop).md) - Web, Desktop 앱, VS Code 확장 사용법
 
 ### 04. 워크플로우
 - [코드 분석](./04-워크플로우(workflows)/01-코드분석(analysis).md) - 코드베이스 이해, 구조 분석
@@ -54,11 +55,14 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 - [CLAUDE.md 작성법](./07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md) - 프로젝트 설정 최적화
 - [성능 최적화](./07-최적화(optimization)/03-성능최적화(performance).md) - 속도, 정확도 개선
 - [비용 관리](./07-최적화(optimization)/04-비용관리(cost-management).md) - 토큰 절약, 비용 절감
+- [CLAUDE.md 템플릿](./07-최적화(optimization)/05-CLAUDE-MD템플릿(claude-md-templates).md) - React, Python, Java 등 프로젝트별 템플릿
 
 ### 99. 부록
 - [CLI 레퍼런스](./99-부록(appendix)/01-CLI레퍼런스(cli-reference).md) - 명령어, 플래그, 환경변수 전체 목록
 - [문제 해결](./99-부록(appendix)/02-문제해결(troubleshooting).md) - 자주 발생하는 오류와 해결법
 - [용어집](./99-부록(appendix)/03-용어집(glossary).md) - Claude Code 관련 용어 정리
+- [FAQ](./99-부록(appendix)/04-FAQ(faq).md) - 자주 묻는 질문과 답변
+- [팁 30선](./99-부록(appendix)/05-팁모음(tips).md) - 알아두면 좋은 실전 팁 모음
 
 ---
 

@@ -1,0 +1,187 @@
+# 자주 묻는 질문 (FAQ)
+
+Claude Code 사용 시 자주 묻는 질문과 답변을 정리했습니다.
+
+---
+
+## 설치 및 설정
+
+### Q: Claude Code는 무료인가요?
+
+**A:** Claude Free 플랜에서도 Terminal CLI와 VS Code 확장을 사용할 수 있습니다. Pro($20/월) 이상이면 Desktop 앱과 Web도 사용 가능합니다. API 키 방식은 사용량에 따라 과금됩니다 (평균 $100-200/월).
+
+### Q: Windows에서 사용할 수 있나요?
+
+**A:** 네. 두 가지 방법이 있습니다:
+1. **Git Bash (권장)**: Git for Windows 설치 후 PowerShell/CMD에서 바로 사용 가능. 관리자 권한 불필요
+2. **WSL2**: Linux 환경에서 사용
+
+### Q: Node.js 버전이 안 맞다고 나와요
+
+**A:** Node.js 18 이상이 필요합니다. nvm으로 버전을 관리하세요:
+```bash
+nvm install 20
+nvm use 20
+```
+
+### Q: API 키와 구독 로그인, 어떤 게 나은가요?
+
+**A:**
+- **구독 로그인 (OAuth)**: Pro/Max 구독이 있으면 별도 비용 없이 사용. 간편함
+- **API 키**: 사용량을 세밀하게 제어하고 싶을 때. CI/CD 등 자동화에 적합
+
+---
+
+## 사용법
+
+### Q: Claude Code는 어떤 프로그래밍 언어를 지원하나요?
+
+**A:** 모든 프로그래밍 언어를 지원합니다. JavaScript, TypeScript, Python, Java, Go, Rust, C++, Swift, Kotlin, Ruby, PHP 등 어떤 언어든 사용 가능합니다.
+
+### Q: `/commit`이 뭔가요?
+
+**A:** Claude Code 내에서 사용하는 슬래시 명령어입니다. 현재 변경사항을 분석하여 자동으로 커밋 메시지를 작성하고 커밋합니다.
+```
+> /commit
+# Claude가 git diff를 분석 → 커밋 메시지 생성 → 커밋 실행
+```
+
+### Q: 파일을 잘못 수정했어요. 되돌릴 수 있나요?
+
+**A:** Claude Code는 파일 편집 전에 되돌릴 수 있는 방법을 제공합니다:
+- **Undo**: Claude Code가 제안한 변경을 거부하면 적용되지 않음
+- **Git**: `git checkout -- 파일명` 또는 `git stash`로 복원
+- Claude에게 요청: `"방금 변경한 것을 되돌려줘"`
+
+### Q: 대화가 너무 길어져서 느려졌어요
+
+**A:** 컨텍스트 윈도우가 가득 차면 자동으로 압축되지만, 직접 관리할 수도 있습니다:
+- `/compact` - 대화를 수동으로 압축
+- `/clear` - 대화 초기화 (새 세션 시작)
+- 새 작업은 새 세션에서 시작하는 것이 좋습니다
+
+### Q: Claude가 내 프로젝트 전체를 읽나요?
+
+**A:** 아닙니다. 필요한 파일만 선택적으로 읽습니다. 처음에는 프로젝트 구조를 파악하고, 작업에 필요한 파일만 열어봅니다. CLAUDE.md가 있으면 프로젝트 이해가 더 빨라집니다.
+
+### Q: 인터넷 없이 사용할 수 있나요?
+
+**A:** 아니요. Claude Code는 Anthropic 서버와 통신하여 AI 처리를 수행하므로 인터넷 연결이 필수입니다.
+
+---
+
+## CLAUDE.md
+
+### Q: CLAUDE.md는 꼭 만들어야 하나요?
+
+**A:** 필수는 아니지만 강력히 권장합니다. CLAUDE.md가 있으면:
+- 프로젝트 규칙을 매번 설명할 필요 없음
+- 일관된 코딩 스타일 유지
+- 팀원 모두 같은 규칙 적용
+
+### Q: CLAUDE.md를 어디에 놓아야 하나요?
+
+**A:** 프로젝트 루트에 놓으면 자동으로 인식됩니다. 하위 폴더에도 추가 가능합니다:
+```
+프로젝트/
+├── CLAUDE.md              # 프로젝트 전체 규칙
+├── src/
+│   └── components/
+│       └── CLAUDE.md      # 컴포넌트 관련 규칙
+```
+
+### Q: CLAUDE.md가 너무 길면 문제가 되나요?
+
+**A:** 네. CLAUDE.md도 컨텍스트 윈도우를 차지합니다. 핵심 규칙만 간결하게 작성하세요 (50-100줄 권장).
+
+---
+
+## 비용 및 성능
+
+### Q: 토큰 사용량을 어떻게 확인하나요?
+
+**A:** Claude Code 세션에서 `/cost` 명령어로 현재 세션의 토큰 사용량을 확인할 수 있습니다.
+
+### Q: 비용을 줄이려면 어떻게 해야 하나요?
+
+**A:**
+1. **명확한 지시**: 한 번에 정확히 요청하면 재시도가 줄어듦
+2. **파일 범위 지정**: `"src/utils/auth.ts 파일의 login 함수를 수정해줘"` (파일 지정)
+3. **적절한 세션 관리**: 작업이 달라지면 `/clear`로 새 세션 시작
+4. **CLAUDE.md 활용**: 반복 설명 대신 CLAUDE.md에 규칙 기록
+5. **`/compact` 사용**: 긴 대화는 압축하여 토큰 절약
+
+### Q: 응답이 느린데 어떻게 해야 하나요?
+
+**A:**
+- 컨텍스트가 큰 경우 `/compact` 또는 `/clear` 사용
+- 네트워크 상태 확인
+- 큰 파일을 한 번에 여러 개 읽지 않도록 범위 지정
+
+---
+
+## 보안
+
+### Q: 내 코드가 Anthropic에 저장되나요?
+
+**A:** Anthropic의 API 사용 정책에 따릅니다. 일반적으로 API를 통한 입력은 모델 학습에 사용되지 않습니다. 민감한 프로젝트라면 Anthropic의 최신 개인정보 처리방침을 확인하세요.
+
+### Q: API 키가 노출되었어요
+
+**A:**
+1. [console.anthropic.com](https://console.anthropic.com)에서 즉시 키를 삭제/재발급
+2. Git 히스토리에 남아있다면 해당 커밋도 제거
+3. `.env` 파일은 반드시 `.gitignore`에 추가
+
+### Q: Claude가 위험한 명령어를 실행하나요?
+
+**A:** Claude Code는 위험한 작업(파일 삭제, force push 등) 전에 반드시 사용자 확인을 요청합니다. 권한 모드를 설정하여 자동 실행 범위를 제어할 수 있습니다.
+
+---
+
+## 트러블슈팅
+
+### Q: `claude` 명령어를 찾을 수 없다고 나와요
+
+**A:**
+```bash
+# npm 전역 bin 경로 확인
+npm config get prefix
+# 해당 경로/bin이 PATH에 있는지 확인
+
+# PATH에 추가
+echo 'export PATH=$(npm config get prefix)/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Q: 인증 오류가 발생해요
+
+**A:**
+```bash
+# OAuth 재로그인
+claude auth login
+
+# API 키 확인
+echo $ANTHROPIC_API_KEY
+
+# API 키 재설정
+export ANTHROPIC_API_KEY=sk-ant-새로운키
+```
+
+### Q: MCP 서버 연결이 안 돼요
+
+**A:**
+```bash
+# MCP 서버 상태 확인
+claude mcp list
+
+# 진단 실행
+claude doctor
+```
+
+---
+
+## 다음 단계
+
+-> [문제 해결 상세 가이드](./02-문제해결(troubleshooting).md)
+-> [용어집](./03-용어집(glossary).md)
