@@ -1,8 +1,14 @@
 # Claude Code 완벽 가이드 (한국어)
 
 Claude Code의 설치부터 고급 활용까지, 한국어로 작성된 포괄적인 가이드입니다.
+그리고 Claude Code를 **실제로 하루 단위 개발에 굴리기 위한** 바이브 코딩 플레이북을 함께 제공합니다.
 
-> 모든 문서는 [`claude-code-guide/`](./claude-code-guide/) 디렉토리에 있습니다.
+이 레포는 두 개의 기둥으로 구성됩니다.
+
+| 디렉토리 | 성격 | 언제 읽나 |
+|---------|-----|----------|
+| [`claude-code-guide/`](./claude-code-guide/) | **레퍼런스** — Claude Code 기능/개념 설명 | "이 기능이 뭐지?" |
+| [`vibe-coding/`](./vibe-coding/) | **플레이북** — 실전 워크플로우/프롬프트/템플릿 | "내일 출근해서 뭐부터 하지?" |
 
 ---
 
@@ -58,6 +64,18 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 - [성능 최적화](./claude-code-guide/07-최적화(optimization)/03-성능최적화(performance).md) - 속도, 정확도 개선
 - [비용 관리](./claude-code-guide/07-최적화(optimization)/04-비용관리(cost-management).md) - 토큰 절약, 비용 절감
 - [CLAUDE.md 템플릿](./claude-code-guide/07-최적화(optimization)/05-CLAUDE-MD템플릿(claude-md-templates).md) - React, Python, Java 등 프로젝트별 템플릿
+
+### [Vibe Coding 플레이북 — 실전 자산](./vibe-coding/README.md)
+"문서/프롬프트/템플릿을 복붙해서 바로 쓰는" 실행 키트입니다. `claude-code-guide/`가 이론/레퍼런스라면, 이 폴더는 손에 쥐는 자산입니다.
+
+- [워크플로우](./vibe-coding/01-워크플로우(workflow)/) - 빠른시작(5단계) + 기능/버그/리팩토링/스키마/UI 흐름
+- [프롬프트 템플릿](./vibe-coding/02-프롬프트(prompts)/) - 범용 + 7가지 작업 유형별 재사용 템플릿
+- [문서 템플릿](./vibe-coding/03-문서템플릿(templates)/) - CLAUDE.md / PRD.md / architecture.md / erd.md / feature-spec
+- [에이전트 협업](./vibe-coding/04-에이전트(agents)/) - 멀티 에이전트 패턴, 역할 기반 협업, 크로스 에이전트 핸드오프
+- [에이전트 친화 포맷](./vibe-coding/05-포맷(formats)/) - Markdown + Mermaid 원칙
+- [엔드투엔드 예제](./vibe-coding/06-예제(examples)/) - 기능 개발 + 멀티 에이전트 파이프라인 실사례
+
+→ 시작하려면 **[vibe-coding/01-워크플로우/01-빠른시작](./vibe-coding/01-워크플로우(workflow)/01-빠른시작(quickstart).md)** 5분 가이드.
 
 ### 99. 부록
 - [CLI 레퍼런스](./claude-code-guide/99-부록(appendix)/01-CLI레퍼런스(cli-reference).md) - 명령어, 플래그, 환경변수 전체 목록
