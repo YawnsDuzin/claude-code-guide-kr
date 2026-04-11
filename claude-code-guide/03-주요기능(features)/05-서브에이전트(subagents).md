@@ -403,3 +403,12 @@ Claude: 여러 에이전트로 현재 상태를 분석하고 계획을 수립하
 | **주의사항** | 토큰 소비 증가, 컨텍스트 독립성, 충돌 관리 |
 
 서브에이전트를 활용하면 복잡한 작업을 효율적으로 처리할 수 있습니다. 특히 코드 분석, 리서치, 리팩토링 계획 수립 등에서 큰 효과를 발휘합니다.
+
+---
+
+## 관련 문서
+
+- **멀티 에이전트 협업 패턴 4종**: [08-바이브코딩/04-에이전트협업/01-멀티에이전트패턴](../08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/01-멀티에이전트패턴(multi-agent-patterns).md) — Orchestrator-Worker / Pipeline / Parallel / Debate
+- **역할 기반 4-role 협업**: [02-역할기반협업](../08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/02-역할기반협업(role-based).md) — Planner / Coder / Reviewer / Tester
+- **크로스 에이전트 핸드오프**: [03-크로스에이전트핸드오프](../08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/03-크로스에이전트핸드오프(cross-agent-handoff).md) — Claude Code ↔ Cursor ↔ Codex 컨텍스트 전달
+- **실전 사례**: [05-예제/02-멀티에이전트예제](../08-바이브코딩(vibe-coding)/05-예제(examples)/02-멀티에이전트예제(multi-agent-pipeline).md)

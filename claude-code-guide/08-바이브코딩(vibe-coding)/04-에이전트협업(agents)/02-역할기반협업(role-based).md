@@ -193,4 +193,4 @@ Coder가 아니다. Planner의 계획도 모른다. diff만 본다.
 
 ## 확장: 5-Role (+ Debugger)
 
-버그 수정이 많은 주라면 **Debugger** 역할을 추가합니다. [02-버그수정(bugfix) 프롬프트](../02-프롬프트(prompts)/02-버그수정(bugfix).md)의 "원인 분석" 단계 = Debugger 역할.
+버그 수정이 많은 주라면 **Debugger** 역할을 추가합니다. [02-버그수정(bugfix) 프롬프트](../02-프롬프트템플릿(prompts)/02-버그수정(bugfix).md)의 "원인 분석" 단계 = Debugger 역할.

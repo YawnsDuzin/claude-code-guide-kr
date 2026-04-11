@@ -9,11 +9,11 @@
 | 파일 | 용도 | 기반 워크플로우 |
 |------|------|----------------|
 | [00-범용템플릿(universal).md](./00-범용템플릿(universal).md) | 모든 작업에 공통으로 쓰는 6-section 구조 | - |
-| [01-기능개발(feature).md](./01-기능개발(feature).md) | 새 기능 추가 | [02-기능개발흐름](../01-워크플로우(workflow)/02-기능개발흐름(feature-flow).md) |
-| [02-버그수정(bugfix).md](./02-버그수정(bugfix).md) | 버그 원인 분석 + 수정 | [03-버그수정흐름](../01-워크플로우(workflow)/03-버그수정흐름(bugfix-flow).md) |
-| [03-리팩토링(refactoring).md](./03-리팩토링(refactoring).md) | 구조 개선 | [04-리팩토링흐름](../01-워크플로우(workflow)/04-리팩토링흐름(refactoring-flow).md) |
-| [04-스키마마이그레이션(schema).md](./04-스키마마이그레이션(schema).md) | DB 스키마 변경 | [05-스키마변경흐름](../01-워크플로우(workflow)/05-스키마변경흐름(schema-flow).md) |
-| [05-UI구현(ui).md](./05-UI구현(ui).md) | 화면/컴포넌트 | [06-UI구현흐름](../01-워크플로우(workflow)/06-UI구현흐름(ui-flow).md) |
+| [01-기능개발(feature).md](./01-기능개발(feature).md) | 새 기능 추가 | [04-워크플로우/07-기능개발흐름](../../04-워크플로우(workflows)/07-기능개발흐름(feature-flow).md) |
+| [02-버그수정(bugfix).md](./02-버그수정(bugfix).md) | 버그 원인 분석 + 수정 | [04-워크플로우/08-버그수정흐름](../../04-워크플로우(workflows)/08-버그수정흐름(bugfix-flow).md) |
+| [03-리팩토링(refactoring).md](./03-리팩토링(refactoring).md) | 구조 개선 | [04-워크플로우/09-리팩토링흐름](../../04-워크플로우(workflows)/09-리팩토링흐름(refactoring-flow).md) |
+| [04-스키마마이그레이션(schema).md](./04-스키마마이그레이션(schema).md) | DB 스키마 변경 | [04-워크플로우/10-스키마변경흐름](../../04-워크플로우(workflows)/10-스키마변경흐름(schema-flow).md) |
+| [05-UI구현(ui).md](./05-UI구현(ui).md) | 화면/컴포넌트 | [04-워크플로우/11-UI구현흐름](../../04-워크플로우(workflows)/11-UI구현흐름(ui-flow).md) |
 | [06-코드리뷰(review).md](./06-코드리뷰(review).md) | 리뷰/2차 의견 | - |
 | [07-탐색분석(exploration).md](./07-탐색분석(exploration).md) | 낯선 코드베이스 이해 | - |
 

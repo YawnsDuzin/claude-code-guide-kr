@@ -84,4 +84,4 @@ Step 6. 중간 위임 레이어 제거 (PR 6)
 
 ## 대응 프롬프트
 
-→ [02-프롬프트/03-리팩토링(refactoring).md](../02-프롬프트(prompts)/03-리팩토링(refactoring).md)
+→ [08-바이브코딩/02-프롬프트템플릿/03-리팩토링(refactoring).md](../08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/03-리팩토링(refactoring).md)

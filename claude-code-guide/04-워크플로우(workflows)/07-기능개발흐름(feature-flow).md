@@ -56,7 +56,7 @@ flowchart TD
 
 ### 3. feature-spec 작성 (5분)
 
-`docs/features/<feature-name>.md`를 만들고, [`03-문서템플릿/feature-spec.template.md`](../03-문서템플릿(templates)/feature-spec.template.md)를 복사해서 채웁니다.
+`docs/features/<feature-name>.md`를 만들고, [`08-바이브코딩/03-문서템플릿/feature-spec.template.md`](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/feature-spec.template.md)를 복사해서 채웁니다.
 
 최소 채울 항목:
 - 목적 1줄
@@ -66,7 +66,7 @@ flowchart TD
 
 ### 4. 프롬프트 템플릿 로드
 
-[`02-프롬프트/01-기능개발(feature).md`](../02-프롬프트(prompts)/01-기능개발(feature).md)를 복사합니다.
+[`08-바이브코딩/02-프롬프트템플릿/01-기능개발(feature).md`](../08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/01-기능개발(feature).md)를 복사합니다.
 
 ### 5. 작업 크기 판단
 
@@ -116,4 +116,4 @@ docs: update PRD/erd/architecture
 
 ## 대응 프롬프트
 
-→ [02-프롬프트/01-기능개발(feature).md](../02-프롬프트(prompts)/01-기능개발(feature).md)
+→ [08-바이브코딩/02-프롬프트템플릿/01-기능개발(feature).md](../08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/01-기능개발(feature).md)

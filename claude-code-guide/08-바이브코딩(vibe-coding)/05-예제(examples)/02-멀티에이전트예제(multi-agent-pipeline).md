@@ -18,7 +18,7 @@
 
 ### 투입 프롬프트
 
-[02-역할기반협업 Planner 템플릿](../04-에이전트(agents)/02-역할기반협업(role-based).md#planner-프롬프트)을 그대로 복사해서 채움.
+[02-역할기반협업 Planner 템플릿](../04-에이전트협업(agents)/02-역할기반협업(role-based).md#planner-프롬프트)을 그대로 복사해서 채움.
 
 ```markdown
 ## 역할
@@ -374,4 +374,4 @@ test(payment): add failure path tests (step 2 hardening)
 - 기존 테스트가 약한 곳
 - "그냥 정리" 아닌 구조 변경
 
-작은 버그 수정에 이 패턴 쓰면 오버엔지니어링입니다. [01-멀티에이전트패턴의 선택표](../04-에이전트(agents)/01-멀티에이전트패턴(multi-agent-patterns).md#패턴-선택표) 참고.
+작은 버그 수정에 이 패턴 쓰면 오버엔지니어링입니다. [01-멀티에이전트패턴의 선택표](../04-에이전트협업(agents)/01-멀티에이전트패턴(multi-agent-patterns).md#패턴-선택표) 참고.

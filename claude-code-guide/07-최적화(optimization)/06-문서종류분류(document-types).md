@@ -15,10 +15,10 @@
 
 | # | 문서 | 위치 | 목적 | 에이전트 활용도 | 템플릿 |
 |---|------|------|------|----------------|--------|
-| M1 | **CLAUDE.md** | 루트 | 프로젝트 규칙 / 금지사항 / 빌드 명령 | ★★★★★ — 세션 시작 시 자동 로드 | [CLAUDE.template.md](./CLAUDE.template.md) |
-| M2 | **PRD.md** | `docs/` | 무엇을 왜 만드는가, 우선순위, 범위 밖 | ★★★★★ — 기능 작업의 원천 | [PRD.template.md](./PRD.template.md) |
-| M3 | **architecture.md** | `docs/` | 시스템 구조 (Mermaid 1장+) | ★★★★☆ — 영향 범위 판단 | [architecture.template.md](./architecture.template.md) |
-| M4 | **erd.md** | `docs/` | 데이터 모델 (Mermaid ER) | ★★★★★ — 스키마 작업의 원천 | [erd.template.md](./erd.template.md) |
+| M1 | **CLAUDE.md** | 루트 | 프로젝트 규칙 / 금지사항 / 빌드 명령 | ★★★★★ — 세션 시작 시 자동 로드 | [CLAUDE.template.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/CLAUDE.template.md) |
+| M2 | **PRD.md** | `docs/` | 무엇을 왜 만드는가, 우선순위, 범위 밖 | ★★★★★ — 기능 작업의 원천 | [PRD.template.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/PRD.template.md) |
+| M3 | **architecture.md** | `docs/` | 시스템 구조 (Mermaid 1장+) | ★★★★☆ — 영향 범위 판단 | [architecture.template.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/architecture.template.md) |
+| M4 | **erd.md** | `docs/` | 데이터 모델 (Mermaid ER) | ★★★★★ — 스키마 작업의 원천 | [erd.template.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/erd.template.md) |
 
 ### 왜 이 4개가 필수인가
 
@@ -42,9 +42,9 @@
 
 | # | 문서 | 위치 | 추가 시점 | 에이전트 활용도 | 비고 |
 |---|------|------|----------|----------------|------|
-| R1 | **feature-spec** | `docs/features/<name>.md` | P0 기능 1건당 | ★★★★★ | 작업 단위 컨텍스트. [템플릿](./feature-spec.template.md) |
+| R1 | **feature-spec** | `docs/features/<name>.md` | P0 기능 1건당 | ★★★★★ | 작업 단위 컨텍스트. [템플릿](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/feature-spec.template.md) |
 | R2 | **ADR (Architecture Decision Record)** | `docs/adr/NNNN-*.md` | "왜 X 대신 Y?" 결정마다 | ★★★☆☆ | 재발 결정 회피, 1결정 = 1파일 |
-| R3 | **handoff 노트** | `docs/handoff/YYYY-MM-DD-*.md` | 도구/세션 전환 시 | ★★★★☆ | [크로스 핸드오프](../04-에이전트(agents)/03-크로스에이전트핸드오프(cross-agent-handoff).md) 참조 |
+| R3 | **handoff 노트** | `docs/handoff/YYYY-MM-DD-*.md` | 도구/세션 전환 시 | ★★★★☆ | [크로스 핸드오프](../08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/03-크로스에이전트핸드오프(cross-agent-handoff).md) 참조 |
 
 ### 추가 트리거
 
@@ -168,5 +168,5 @@ P0 작업 시작 전:
 
 ## 관련 문서
 
-- [03-문서템플릿/README.md](./README.md) — 각 템플릿 파일의 복사 방법
-- [05-포맷/01-문서종류별포맷매칭](../05-포맷(formats)/01-문서종류별포맷매칭(format-matching).md) — 어떤 포맷으로 적을지
+- [08-바이브코딩/03-문서템플릿/README.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/README.md) — 각 템플릿 파일의 복사 방법
+- [07-에이전트친화포맷](./07-에이전트친화포맷(agent-friendly-formats).md) — 어떤 포맷으로 적을지

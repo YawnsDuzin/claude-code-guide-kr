@@ -285,4 +285,11 @@
 
 ## 다음 단계
 
--> [CLAUDE.md 작성법 상세 가이드](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md)
+-> [CLAUDE.md 작성법 상세 가이드](./02-CLAUDE-MD작성법(claude-md).md)
+
+---
+
+## 관련 문서
+
+- **명령형 CLAUDE.md 골격 (복사용)**: [08-바이브코딩/03-문서템플릿/CLAUDE.template.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/CLAUDE.template.md) — 11섹션, 빈 칸 채워 사용
+- **함께 쓰는 문서 템플릿**: [PRD](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/PRD.template.md) / [architecture](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/architecture.template.md) / [erd](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/erd.template.md) / [feature-spec](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/feature-spec.template.md)
