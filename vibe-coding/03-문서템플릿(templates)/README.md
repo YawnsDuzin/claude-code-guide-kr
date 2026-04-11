@@ -3,10 +3,16 @@
 > 프로젝트 루트에 **그대로 복사**해서 쓰는 문서 템플릿.
 > 이 파일들을 수정하는 건 메타 작업(템플릿 자체 개선). 프로젝트에 적용할 땐 복사본만 수정하세요.
 
+## 먼저 읽기
+
+> "어떤 문서를 만들고 어떤 걸 만들지 않을 것인가" 의 결정은 템플릿을 복사하기 **전에** 합니다.
+> → [00-문서종류분류(document-types).md](./00-문서종류분류(document-types).md) — 필수 4종 / 권장 3종 / 불필요 5종
+
 ## 파일 목록
 
 | 템플릿 | 복사 위치 | 목적 |
 |--------|----------|------|
+| [00-문서종류분류(document-types).md](./00-문서종류분류(document-types).md) | (읽기용) | 어떤 문서를 만들고 무엇을 만들지 않을지 |
 | [CLAUDE.template.md](./CLAUDE.template.md) | `<repo>/CLAUDE.md` | 에이전트가 세션 시작 시 자동으로 읽는 프로젝트 규칙 |
 | [PRD.template.md](./PRD.template.md) | `<repo>/docs/PRD.md` | 제품 요구사항 — 무엇을 왜 만드는가 |
 | [architecture.template.md](./architecture.template.md) | `<repo>/docs/architecture.md` | 시스템 구조 — Mermaid 다이어그램 중심 |

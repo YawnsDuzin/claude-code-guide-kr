@@ -46,6 +46,7 @@ vibe-coding/
 │   └── 07-탐색분석(exploration).md
 ├── 03-문서템플릿(templates)/           프로젝트에 복붙할 문서 원본
 │   ├── README.md
+│   ├── 00-문서종류분류(document-types).md   필수4/권장3/불필요5 분류
 │   ├── CLAUDE.template.md
 │   ├── PRD.template.md
 │   ├── architecture.template.md
@@ -57,7 +58,8 @@ vibe-coding/
 │   ├── 02-역할기반협업(role-based).md
 │   └── 03-크로스에이전트핸드오프(cross-agent-handoff.md
 ├── 05-포맷(formats)/                   에이전트 친화 포맷 선택 가이드
-│   └── README.md
+│   ├── README.md                       포맷 일반 원칙 + Mermaid 스니펫
+│   └── 01-문서종류별포맷매칭(format-matching).md   문서 종류 × 포맷 결정표
 └── 06-예제(examples)/                  엔드투엔드 워크스루
     ├── README.md
     ├── 01-기능개발예제(feature-walkthrough).md

@@ -70,9 +70,9 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 
 - [워크플로우](./vibe-coding/01-워크플로우(workflow)/) - 빠른시작(5단계) + 기능/버그/리팩토링/스키마/UI 흐름
 - [프롬프트 템플릿](./vibe-coding/02-프롬프트(prompts)/) - 범용 + 7가지 작업 유형별 재사용 템플릿
-- [문서 템플릿](./vibe-coding/03-문서템플릿(templates)/) - CLAUDE.md / PRD.md / architecture.md / erd.md / feature-spec
+- [문서 템플릿](./vibe-coding/03-문서템플릿(templates)/) - **문서 종류 분류(필수/권장/불필요)** + CLAUDE.md / PRD / architecture / erd / feature-spec
 - [에이전트 협업](./vibe-coding/04-에이전트(agents)/) - 멀티 에이전트 패턴, 역할 기반 협업, 크로스 에이전트 핸드오프
-- [에이전트 친화 포맷](./vibe-coding/05-포맷(formats)/) - Markdown + Mermaid 원칙
+- [에이전트 친화 포맷](./vibe-coding/05-포맷(formats)/) - Markdown + Mermaid 원칙 + **문서 종류별 포맷 매칭표**
 - [엔드투엔드 예제](./vibe-coding/06-예제(examples)/) - 기능 개발 + 멀티 에이전트 파이프라인 실사례
 
 → 시작하려면 **[vibe-coding/01-워크플로우/01-빠른시작](./vibe-coding/01-워크플로우(workflow)/01-빠른시작(quickstart).md)** 5분 가이드.
