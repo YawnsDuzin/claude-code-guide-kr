@@ -31,12 +31,20 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 - [Web & Desktop](./03-주요기능(features)/07-웹데스크톱(web-desktop).md) - Web, Desktop 앱, VS Code 확장 사용법
 
 ### 04. 워크플로우
+**개념 (워크플로우 기초)**
 - [코드 분석](./04-워크플로우(workflows)/01-코드분석(analysis).md) - 코드베이스 이해, 구조 분석
 - [코딩](./04-워크플로우(workflows)/02-코딩(coding).md) - 기능 개발, 코드 생성
 - [디버깅](./04-워크플로우(workflows)/03-디버깅(debugging).md) - 버그 추적, 오류 해결
 - [리팩토링](./04-워크플로우(workflows)/04-리팩토링(refactoring).md) - 코드 개선, 구조 변경
 - [Git 워크플로우](./04-워크플로우(workflows)/05-Git워크플로우(git-workflow).md) - 커밋, PR, 코드 리뷰
 - [Git 기본사용법](./04-워크플로우(workflows)/06-Git기본사용법(git-basics).md) - Git 기초, 명령어, 상황별 Git Flow
+
+**실전 플레이북 (단계 체크리스트)**
+- [기능 개발 흐름](./04-워크플로우(workflows)/07-기능개발흐름(feature-flow).md)
+- [버그 수정 흐름](./04-워크플로우(workflows)/08-버그수정흐름(bugfix-flow).md)
+- [리팩토링 흐름](./04-워크플로우(workflows)/09-리팩토링흐름(refactoring-flow).md)
+- [스키마 변경 흐름](./04-워크플로우(workflows)/10-스키마변경흐름(schema-flow).md)
+- [UI 구현 흐름](./04-워크플로우(workflows)/11-UI구현흐름(ui-flow).md)
 
 ### 05. 기술 스택별 활용
 - [프론트엔드](./05-기술스택(tech-stacks)/01-프론트엔드(frontend).md) - React, Vue, Angular, Next.js
@@ -56,6 +64,18 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 - [성능 최적화](./07-최적화(optimization)/03-성능최적화(performance).md) - 속도, 정확도 개선
 - [비용 관리](./07-최적화(optimization)/04-비용관리(cost-management).md) - 토큰 절약, 비용 절감
 - [CLAUDE.md 템플릿](./07-최적화(optimization)/05-CLAUDE-MD템플릿(claude-md-templates).md) - React, Python, Java 등 프로젝트별 템플릿
+- [문서 종류 분류](./07-최적화(optimization)/06-문서종류분류(document-types).md) - 필수 4종 / 권장 3종 / 불필요 5종
+- [에이전트 친화 포맷](./07-최적화(optimization)/07-에이전트친화포맷(agent-friendly-formats).md) - Markdown + Mermaid + 문서 종류별 포맷 매칭표
+
+### [08. 바이브 코딩 — 실전 자산](./08-바이브코딩(vibe-coding)/README.md)
+복붙해서 바로 쓰는 프롬프트 / 문서 템플릿 / 협업 패턴 / 예제 모음.
+
+- [00. 개요](./08-바이브코딩(vibe-coding)/00-개요(overview).md) - 바이브 코딩 등식과 8단계 공통 루프
+- [01. 빠른 시작](./08-바이브코딩(vibe-coding)/01-빠른시작(quickstart).md) - 5단계 초기화
+- [02. 프롬프트 템플릿](./08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/) - 범용 + 7가지 작업 유형별
+- [03. 문서 템플릿](./08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/) - CLAUDE / PRD / architecture / erd / feature-spec
+- [04. 에이전트 협업](./08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/) - 멀티 에이전트 패턴, 4-role, 핸드오프
+- [05. 엔드투엔드 예제](./08-바이브코딩(vibe-coding)/05-예제(examples)/) - 기능 개발 + 멀티 에이전트 파이프라인 사례
 
 ### 99. 부록
 - [CLI 레퍼런스](./99-부록(appendix)/01-CLI레퍼런스(cli-reference).md) - 명령어, 플래그, 환경변수 전체 목록

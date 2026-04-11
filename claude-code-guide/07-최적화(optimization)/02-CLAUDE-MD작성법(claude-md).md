@@ -247,3 +247,10 @@ Claude가 자동으로 적절한 CLAUDE.md 파일에 추가합니다.
 | 점진적 개선 | 세션마다 발견한 규칙을 하나씩 추가 |
 
 > **다음 단계:** [성능 최적화](./03-성능최적화(performance).md)로 이동하여 Claude Code의 효율을 높이세요.
+
+---
+
+## 관련 문서
+
+- **복사용 CLAUDE.md 템플릿 (명령형, 11섹션)**: [08-바이브코딩/03-문서템플릿/CLAUDE.template.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/CLAUDE.template.md)
+- **어떤 문서를 만들지**: [06-문서종류분류](./06-문서종류분류(document-types).md) — 필수 4종 / 권장 3종 / 불필요 5종
