@@ -299,3 +299,92 @@
 - 그 자체를 설치하지 않음.
 
 ---
+
+## 3. 선택 가이드
+
+"무엇을 고를지"는 **프로젝트 유형 × 기술 스택 × 작업 단계** 3축으로 결정합니다.
+
+### 3-1. 프로젝트 유형별
+
+| 프로젝트 유형 | 1순위 | 2순위 | 이유 |
+|-------------|------|------|------|
+| **솔로 사이드 프로젝트** (웹 앱) | lst97 (33) | 0xfurai (선별) | 규모 작음, 풀스택 커버, 학습 부담 적음 |
+| **솔로 OSS 라이브러리** | 0xfurai (선별) | anthropics/skills | 언어/테스트/문서 집중 — 광범위 불필요 |
+| **2~5인 스타트업** | VoltAgent | wshobson (선별) | 도메인 전문가 + 언어 전문 조합 |
+| **10인+ 팀 / 프로덕션** | wshobson | VoltAgent + anthropics/skills | 오케스트레이션 · 관측성 · 컴플라이언스 포함 |
+| **학습·실험용** | hesreallyhim (읽기만) | lst97 (가볍게 시험) | 둘러보고 감 잡기 → 작게 시작 |
+| **레거시 대형 리팩토링** | wshobson `refactorer` + `reviewer` 오케스트레이터 | 0xfurai `testing-*` | 4-role 협업([02-역할기반협업](./02-역할기반협업(role-based).md)) 필수 |
+| **사내 보안 엄격 (플러그인 금지)** | 0xfurai | lst97 | 수동 복사 · 외부 마켓 미의존 |
+| **문서·리포트 생성 중심** | anthropics/skills (docx/pdf/pptx/xlsx) | wshobson `docs-*` | Office 계열은 Anthropic 공식만이 안정적 |
+
+### 3-2. 기술 스택별
+
+| 스택 | 추천 에이전트 (레포) | 추가 팁 |
+|------|-------------------|--------|
+| **Next.js + TypeScript + Postgres** | `frontend-react` + `backend-typescript` + `database-postgres` (VoltAgent 또는 wshobson) | lst97의 풀스택 조합도 OK |
+| **Python (FastAPI/Django) + Postgres** | `python-pro` + `database-*` + `test-pytest` (wshobson 또는 VoltAgent) | FastAPI는 `api-designer` 병행 |
+| **Go 마이크로서비스** | VoltAgent `go-specialist` + wshobson `kubernetes-architect` | 관측성 에이전트 권장 |
+| **Rust 시스템 프로그래밍** | VoltAgent `rust-ownership-guru` / 0xfurai `rust-*` | wshobson은 비중 낮음 |
+| **Java/Spring** | wshobson `jvm-*` + `security-api` | 엔터프라이즈 조합 |
+| **React Native / Flutter** | 0xfurai `mobile-*` + `testing-e2e` | wshobson의 모바일 커버리지는 얇음 |
+| **Kubernetes / Terraform / 멀티 클라우드** | wshobson `infrastructure-*` + `deployment-engineer` | 16 orchestrator 중 "deployment"/"security-hardening" 활용 |
+| **ML / LLM 앱** | wshobson `ai-engineer` + `mlops-engineer` + `prompt-engineer` | anthropics/skills의 MCP server skill도 점검 |
+| **블록체인 / 스마트컨트랙트** | wshobson `solidity-engineer` + `smart-contract-auditor` | VoltAgent도 일부 커버 |
+| **게임 개발 (Unity/Unreal)** | wshobson `game-*` | 다른 레포는 대부분 없음 |
+| **문서 자동화 (PDF/Office)** | anthropics/skills `pdf`, `docx`, `xlsx`, `pptx` | 라이선스(source-available) 확인 필수 |
+
+> **조합 원칙**: "언어 전문 1명 + 프레임워크 전문 1명 + 인프라 전문 1명 + 리뷰어 1명" 4명 세트가 기본. 더 많은 에이전트는 오히려 오버헤드.
+
+### 3-3. 작업 절차(워크플로우 단계)별
+
+`claude-code-guide/04-워크플로우` 의 8단계 공통 루프를 따라, 각 단계에서 "어떤 에이전트가 좋은가"를 정리.
+
+```mermaid
+flowchart LR
+    S1[1. 유형 분류] --> S2[2. 탐색]
+    S2 --> S3[3. 설계]
+    S3 --> S4[4. 구현]
+    S4 --> S5[5. 테스트]
+    S5 --> S6[6. 리뷰]
+    S6 --> S7[7. 배포]
+    S7 --> S8[8. 관측·유지]
+```
+
+| 단계 | 하는 일 | 쓸만한 에이전트 유형 | 레포 예시 |
+|------|--------|------------------|---------|
+| **1. 유형 분류** | 기능/버그/리팩토링/스키마/UI 중 무엇? | 사람이 직접 — 에이전트 안 씀 | - |
+| **2. 탐색** | 낯선 코드베이스 파악, 영향 범위 식별 | `code-explorer`, `codebase-analyzer`, `architect` | wshobson `Explore`, lst97 `agent-organizer`(읽기), 0xfurai `code-analyzer` |
+| **3. 설계** | PRD→architecture→API 계약 | `backend-architect`, `api-designer`, `system-architect` | VoltAgent Core Dev 11개, SuperClaude `architect` persona |
+| **4. 구현** | 실제 코드 작성 | 언어/프레임워크 전문가 (`typescript-pro`, `python-expert`, `react-specialist` 등) | VoltAgent Language Specialists (28개), 0xfurai 언어·프레임워크 (23개) |
+| **5. 테스트** | 단위/통합/E2E 테스트 추가 | `test-engineer`, `test-*`, `qa-automation` | wshobson `Quality & Testing`, 0xfurai `testing-*` (10개) |
+| **6. 리뷰** | 코드 리뷰 (2차 의견) | `code-reviewer`, `security-auditor`, `performance-reviewer` | wshobson `parallel code review teams` 오케스트레이터, VoltAgent `Quality & Security` (15개) |
+| **7. 배포** | 마이그레이션, CI/CD 업데이트 | `deployment-engineer`, `database-migrator`, `kubernetes-*` | wshobson `Infrastructure & DevOps` + deployment orchestrator |
+| **8. 관측·유지** | 로그/메트릭/알람, 인시던트 대응 | `observability-engineer`, `incident-responder`, `diagnostic-*` | wshobson `Operations` (4개) |
+
+**단계별 조합 패턴 (권장)**
+
+- **작은 작업 (1~2파일)**: 단일 에이전트. `typescript-pro` 같은 언어 전문가 하나면 충분.
+- **중간 작업 (3~5파일)**: 2단계 — 구현 에이전트 + 리뷰 에이전트. 예: `backend-architect` → `code-reviewer`.
+- **큰 작업 (6파일+)**: 4-role — Planner → Coder → Reviewer → Tester ([02-역할기반협업](./02-역할기반협업(role-based).md)). wshobson의 오케스트레이터를 그대로 쓰거나 직접 구성.
+
+### 3-4. 의사결정 흐름도
+
+```mermaid
+flowchart TD
+    Start([레포를 고른다]) --> Q1{프로덕션 규모?}
+    Q1 -- Yes --> Q2{플러그인 마켓 OK?}
+    Q1 -- No --> Q3{솔로/소규모?}
+    Q2 -- Yes --> W[wshobson/agents]
+    Q2 -- No --> F[0xfurai + anthropics/skills]
+    Q3 -- 솔로 --> L[lst97 또는 0xfurai 선별]
+    Q3 -- 2~5인 --> V[VoltAgent]
+    L --> Doc{문서 자동화?}
+    V --> Doc
+    W --> Doc
+    F --> Doc
+    Doc -- Yes --> A[+ anthropics/skills]
+    Doc -- No --> End([완료])
+    A --> End
+```
+
+---
