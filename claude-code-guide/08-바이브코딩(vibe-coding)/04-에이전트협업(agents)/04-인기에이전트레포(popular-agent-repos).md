@@ -178,3 +178,124 @@
 - 여러 소스에서 자산을 **한 번에 둘러보고** 고르고 싶을 때
 - 팀 온보딩 문서에 "이 명령들 설치" 식으로 링크를 줄 때
 - 단일 마켓플레이스로 **거버넌스** 를 두고 싶은 팀
+
+---
+
+### 2-5. lst97/claude-code-sub-agents — 솔로 풀스택 집중형
+
+- **링크**: https://github.com/lst97/claude-code-sub-agents
+- **규모**: 33 에이전트 + 1 메타 오케스트레이터(`agent-organizer`)
+- **카테고리 6**: Development / Infrastructure / Quality & Testing / Data & AI / Security / Business & Specialization
+- **설치**: 레포 클론 → `~/.claude/agents/`. MCP 서버를 옵션으로 붙일 수 있음. 프로젝트 단위로는 `CLAUDE.md`를 복사.
+- **라이선스**: 오픈 (LICENSE 파일 존재)
+
+**장점**
+1. **33개로 딱 떨어지는 크기** — 에이전트 목록 전체를 읽고 파악 가능.
+2. **풀스택 중심** (React/Next.js/Python/Go/TS/PostgreSQL/GraphQL/AWS·Azure·GCP) — 모던 웹 스택에 바로 맞춤.
+3. `agent-organizer` 한 명이 여러 에이전트를 오케스트레이션 — 복잡한 설정 없이 멀티 에이전트 경험.
+
+**단점**
+1. **규모가 작아** 특수 도메인(블록체인/게이밍/모바일 네이티브)은 커버 부족.
+2. 플러그인 마켓 미지원 (수동 복사).
+3. "개인 사용"을 명시 — 프로덕션 규모 팀 배포에는 다른 선택이 나음.
+
+**적합한 경우**
+- **솔로 / 2~3인 풀스택** 팀
+- "에이전트가 너무 많아 헷갈린다"고 느끼는 경우
+- 모던 웹 스택 (Next.js + Postgres + TS) 표준 조합
+
+---
+
+### 2-6. SuperClaude-Org/SuperClaude_Framework — 방법론 프레임워크
+
+- **링크**: https://github.com/SuperClaude-Org/SuperClaude_Framework
+- **규모**: 16 specialist agents / 30 commands / 14 cognitive personas
+- **특징**: "설정 프레임워크" — Claude Code 위에 **행동 지시 + 컴포넌트 오케스트레이션** 레이어를 얹음. 사용자 요청의 키워드/패턴을 보고 페르소나가 **자동 활성화**.
+- **설치**: Python 기반. `pip install SuperClaude` 등 (README 지시 따름).
+- **라이선스**: MIT
+
+**주요 개념**
+- **Persona** (14개): `architect`, `frontend`, `backend`, `analyzer`, `security`, `mentor`, `refactorer`, `performance`, `qa`, `devops`, `scribe`, `iterative`, `context`, `introspector` — 각 페르소나는 일관된 가치관/출력 형식을 가짐.
+- **Auto-activation**: "리팩토링" 같은 키워드가 나오면 `refactorer` 페르소나가 활성화.
+- **명령어**: `/sc:research`, `/sc:build`, `/sc:test` 등 30개.
+
+**장점**
+1. **방법론이 내장** — 별도 플레이북 없이도 일관된 출력 스타일을 얻음.
+2. 페르소나/명령어/에이전트가 **서로 연동** 되게 설계.
+3. 오픈소스 커뮤니티 활발, 문서화 상세.
+
+**단점**
+1. **학습 곡선**이 가장 큼 — 용어(페르소나/프레임워크/명령어) 이해 필요.
+2. 다른 커뮤니티 에이전트 컬렉션과 **개념 충돌** 가능 (페르소나 vs 서브에이전트).
+3. Python 기반 설치 — 환경에 따라 추가 세팅 부담.
+
+**적합한 경우**
+- "방법론 세트"를 통째로 받아 쓰고 싶은 사람
+- 페르소나 기반 설계를 선호하는 팀
+- 한 프레임워크 내에서 **일관성**이 최우선인 경우
+
+**피해야 할 경우**
+- 이미 wshobson/VoltAgent 등 다른 컬렉션을 깊게 쓰는 프로젝트 (혼선 위험)
+
+---
+
+### 2-7. anthropics/skills — 공식 Anthropic 스킬
+
+- **링크**: https://github.com/anthropics/skills
+- **성격**: **공식 Anthropic 레포**. Agent Skills 스펙 + 예시 스킬 + 템플릿.
+- **카테고리**:
+  - Creative & Design (아트/뮤직/디자인)
+  - Development & Technical (웹 테스트, MCP 서버 생성 등)
+  - Enterprise & Communication (커뮤니케이션/브랜딩)
+  - Document Skills (**docx / pdf / pptx / xlsx** 생성·편집) — 프로덕션 Claude 앱의 참조 구현
+- **설치**: 플러그인으로 설치 또는 `~/.claude/skills/`로 복사. 각 스킬은 `SKILL.md` + (옵션) 스크립트/리소스 폴더.
+- **라이선스**:
+  - 대부분 스킬: **Apache 2.0** (오픈소스)
+  - Document skills (docx/pdf/pptx/xlsx): **source-available** (오픈소스 아님, 참조 구현)
+
+**장점**
+1. **공식 품질 보증** — 스펙 준거, 지속 업데이트, 보안 검증.
+2. Document 생성 스킬은 타 레포에서 보기 어려운 **독자적 가치**.
+3. 스킬 **템플릿 + 스펙**이 포함되어 자체 스킬 작성 출발점으로 최적.
+
+**단점**
+1. **커버리지가 좁음** — 182개 짜리 wshobson과 달리 "모든 작업" 대상이 아님.
+2. Document skills의 라이선스 제약을 반드시 확인 (사내 배포 전).
+3. 공식 레포라 실험적 기능/PR 머지가 보수적.
+
+**적합한 경우**
+- 문서 조작(PDF/Office)이 **작업의 한 축** 인 팀
+- 자체 스킬을 만들 계획이라 **스펙/템플릿**이 필요한 경우
+- "공식만 쓴다"는 거버넌스 원칙이 있는 조직
+
+---
+
+### 2-8. hesreallyhim/awesome-claude-code — 메타 큐레이션 리스트
+
+- **링크**: https://github.com/hesreallyhim/awesome-claude-code
+- **성격**: 레포가 자산이 아닌 **링크 큐레이션 리스트** ("awesome-*" 포맷).
+- **카테고리**:
+  - Agent Skills
+  - Workflows & Knowledge Guides (General / Teams / Ralph Wiggum 자동화 루프)
+  - Tooling (IDE 통합, 모니터링, 오케스트레이터, 설정 관리)
+  - Status Lines (터미널 statusline)
+  - Hooks (라이프사이클 이벤트)
+  - Slash-Commands (버전 관리/테스트/문서/CI/PM)
+  - CLAUDE.md Files (언어·도메인 특화 템플릿)
+  - Alternative Clients / 공식 문서
+
+**장점**
+1. **전 생태계 조망** — 새 레포가 어디 있는지 빠르게 파악.
+2. 카테고리가 **용어 기반** 이라 §0 정리와 매핑이 쉬움.
+3. 커뮤니티 활발 (팔로워/기여자 많음).
+
+**단점**
+1. 품질 필터 없음 — 링크된 모든 레포가 **같은 수준이 아님**.
+2. "깊이 있는 가이드"가 아닌 **인덱스** 이므로 선택 피로감.
+3. 업데이트는 메인테이너 속도에 의존.
+
+**사용법**
+- 선택지를 **한 번 훑고**, 마음에 드는 걸 1~2개 골라 이 문서의 §3 선택 가이드로 검증.
+- 그 자체를 설치하지 않음.
+
+---
