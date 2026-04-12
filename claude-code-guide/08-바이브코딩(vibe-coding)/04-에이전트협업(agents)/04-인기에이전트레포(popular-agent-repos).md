@@ -388,3 +388,240 @@ flowchart TD
 ```
 
 ---
+
+## 4. 설치 패턴 3가지
+
+### 4-1. Plugin Marketplace (권장)
+
+공식 `/plugin` 명령으로 관리. 업데이트/제거가 쉽고, 의존성 표시가 명확.
+
+```bash
+# 마켓플레이스 추가
+/plugin marketplace add wshobson/agents
+/plugin marketplace add VoltAgent/awesome-claude-code-subagents
+/plugin marketplace add davepoon/buildwithclaude
+
+# 특정 플러그인 설치
+/plugin install backend-architect@claude-code-workflows
+/plugin install voltagent-lang@VoltAgent
+```
+
+**장점**: 버전 고정, 일괄 업데이트, 제거 깔끔.
+**단점**: 사내 보안 정책이 외부 마켓을 막는 경우 사용 불가.
+
+### 4-2. 전역 수동 복사 (`~/.claude/agents/`)
+
+플러그인 마켓 없이 레포를 클론해 **홈 디렉토리**에 복사.
+
+```bash
+# 예: 0xfurai
+git clone https://github.com/0xfurai/claude-code-subagents.git /tmp/0xfurai
+mkdir -p ~/.claude/agents
+cp /tmp/0xfurai/agents/*.md ~/.claude/agents/
+
+# 또는 선별 복사
+cp /tmp/0xfurai/agents/typescript-*.md ~/.claude/agents/
+cp /tmp/0xfurai/agents/postgres-*.md ~/.claude/agents/
+```
+
+**장점**: 외부 의존 없음, 사내 보안 통과.
+**단점**: 업데이트 시 수동 `git pull`+재복사 필요.
+
+**선별 복사 원칙**: 처음엔 5~10개만. 그 이상 복사하면 자동 위임 시 혼선.
+
+### 4-3. 프로젝트 로컬 설치 (`.claude/agents/`)
+
+프로젝트 루트 `.claude/agents/` 에 두면 **그 프로젝트에서만** 사용.
+
+```bash
+# 프로젝트 루트에서
+mkdir -p .claude/agents
+cp ~/.claude/agents/backend-architect.md .claude/agents/
+cp ~/.claude/agents/typescript-pro.md .claude/agents/
+# 프로젝트 특화 에이전트는 .claude/agents/에 직접 추가
+```
+
+**장점**:
+1. **CLAUDE.md와 함께 git에 커밋** 되어 팀원 간 동기화.
+2. 프로젝트마다 **다른 에이전트 세트** 사용 가능.
+3. 다른 프로젝트에 영향 없음.
+
+**단점**: 프로젝트마다 중복 저장.
+
+**팀 공유 프로토콜**:
+- `.claude/agents/` 를 git에 커밋
+- `CLAUDE.md`에 "사용 중인 에이전트 / 출처" 명시
+- 업데이트 주기를 정해두고 (분기 1회 등) 일괄 동기화
+
+### 4-4. 설치 전 체크리스트
+
+```
+[ ] 레포 라이선스 확인 (사내 반입 정책과 호환?)
+[ ] 마지막 커밋 날짜 확인 (3개월 이상 방치? 주의)
+[ ] 스타/포크 수만 보지 말고 이슈/PR 활성도 확인
+[ ] 내가 쓸 에이전트 파일을 1개 이상 직접 읽어봄 (품질 샘플링)
+[ ] 에이전트가 어떤 툴(예: Bash, WebFetch)에 접근하는지 확인
+[ ] 에이전트 내부에 외부 URL 호출이 있으면 목적 파악
+[ ] 프로젝트 로컬 설치 시 CLAUDE.md에 출처 기록
+```
+
+---
+
+## 5. 보안·품질 주의사항
+
+### 5-1. 커뮤니티 에이전트는 "임의 코드 실행"에 가깝다
+
+에이전트 파일(Markdown)은 단순 문서처럼 보이지만, 실제로는 **Claude Code 세션의 행동 지시**입니다. 악의적이거나 부주의한 에이전트는:
+
+- 민감 파일(`.env`, `~/.ssh/`)을 읽으라고 지시할 수 있음
+- 외부 API로 코드를 전송하라고 할 수 있음
+- `rm -rf` 같은 파괴적 명령을 제안할 수 있음
+- Git credentials을 남용할 수 있음
+
+**완화책**:
+1. **화이트리스트**: `settings.json` 의 `permissions.allow` / `deny` 로 허용 도구를 제한.
+2. **샌드박스 모드** 또는 격리된 워크트리에서 처음 실행.
+3. 미리 **`git diff` 를 반드시 리뷰** 한 뒤 수락.
+4. 작성자 정체가 불분명한 레포는 피함. GitHub 프로필 확인.
+
+### 5-2. 품질 편차
+
+awesome-* 리스트나 커뮤니티 마켓플레이스의 에이전트는 **품질 검증이 통일되지 않음**. 일부는:
+
+- **모호한 지시** ("best practices를 따른다") — 에이전트가 자기 해석으로 탈선
+- **낡은 라이브러리** 의존 (예: 2년 전 버전의 패턴 강요)
+- **토큰 낭비** — 불필요하게 긴 사례 포함
+- **상충 규칙** — 다른 에이전트와 지시가 충돌
+
+**완화책**:
+1. 에이전트 파일을 **설치 전 반드시 읽기** (대부분 100~300줄).
+2. 첫 주는 **1~2개만** 써보고 결과를 검증.
+3. 맞지 않으면 주저 없이 삭제.
+
+### 5-3. 자동 위임(auto-delegation)의 함정
+
+많은 컬렉션은 에이전트가 **키워드에 자동 반응** 하도록 설정되어 있습니다. 이 편의성의 비용:
+
+- 의도하지 않은 에이전트가 **동시에 활성화** 되어 토큰 낭비
+- 두 에이전트가 **상충 제안** 을 내놓아 사용자가 혼란
+- **중복 실행** — 같은 작업을 여러 에이전트가 수행
+
+**완화책**:
+1. 처음엔 자동 위임을 끄고 **명시 호출** 만 사용 (`@agent-name`).
+2. 익숙해진 뒤 자동 위임을 1개씩 켜면서 관찰.
+3. 팀 단위면 **허용 에이전트 화이트리스트**를 `CLAUDE.md` 에 명시.
+
+### 5-4. 라이선스 주의
+
+- **MIT / Apache 2.0**: 상업적 사용/수정/재배포 자유.
+- **source-available**: 공개되어 있지만 **오픈소스 아님** (예: anthropics/skills의 document skills). 사내 배포 전 조건 확인.
+- **라이선스 명시 없음**: 기본적으로 **사용 불가** 로 간주 (저작권법 보수 원칙).
+
+---
+
+## 6. 추천 스타터 세트 (3가지 프리셋)
+
+"오늘 당장 설치할 것"이 고민되면, 아래 세트 중 하나를 그대로 시작하세요.
+
+### 프리셋 A: 솔로 풀스택 (Next.js + Postgres + TypeScript)
+
+```
+설치:
+- lst97/claude-code-sub-agents (33개 전체) — 수동 복사
+- anthropics/skills (pdf, docx만 선택) — 플러그인 또는 복사
+
+실제로 쓰는 에이전트 (7개):
+- agent-organizer (meta)
+- typescript-pro
+- react-specialist (또는 frontend-architect)
+- backend-architect
+- database-postgres
+- test-automator
+- code-reviewer
+```
+
+**운영 방식**: [02-역할기반협업](./02-역할기반협업(role-based).md)의 Planner/Coder/Reviewer 3-role을 lst97 에이전트로 매핑.
+
+### 프리셋 B: 스타트업 (2~5인, 다양한 언어)
+
+```
+설치:
+- VoltAgent/awesome-claude-code-subagents (Language Specialists + Infrastructure + Quality & Security)
+- anthropics/skills (선택)
+
+핵심 에이전트 (10~12개):
+- 언어: typescript-pro, python-expert, go-specialist
+- 프레임워크: react-specialist, fastapi-expert
+- 인프라: kubernetes-architect, terraform-engineer
+- 품질: code-reviewer, security-auditor, test-engineer
+- 메타: multi-agent-coordinator
+```
+
+**운영 방식**: 기능 개발은 [04-워크플로우/07-기능개발흐름](../../04-워크플로우(workflows)/07-기능개발흐름(feature-flow).md)을 따르고, 리팩토링/스키마 변경은 해당 흐름을 준수.
+
+### 프리셋 C: 프로덕션 팀 (10인+, 멀티 서비스)
+
+```
+설치:
+- wshobson/agents (플러그인 마켓으로 선별 설치)
+- anthropics/skills (docx/pdf/pptx/xlsx 포함 전체)
+- 옵션: VoltAgent/awesome-agent-skills (보완)
+
+핵심 플러그인 (6~8개):
+- claude-code-workflows (오케스트레이터)
+- security-hardening
+- performance-analysis
+- infra-kubernetes
+- database-engineering
+- observability-ops
+- parallel-code-review-teams
+```
+
+**운영 방식**:
+- **wshobson의 16 orchestrator 중 하나를 매일 하나씩 읽고** 팀 공유.
+- CI/CD 변경 시 `deployment-engineer` + `security-auditor` 2-role 검증 필수.
+- 인시던트 대응 플레이북은 wshobson `Operations` 오케스트레이터를 프로젝트에 맞게 포크.
+
+---
+
+## 7. 자주 하는 실수 7가지
+
+| 실수 | 결과 | 해결 |
+|------|------|------|
+| "전부 설치해두면 유용할 것 같아" | 자동 위임 충돌, 토큰 낭비, 혼란 | 5~10개로 시작 |
+| 에이전트 파일을 안 읽고 사용 | 엉뚱한 패턴 강요, 라이브러리 버전 충돌 | 설치 전 3개 이상 파일 샘플 리뷰 |
+| 같은 역할 에이전트 2개 설치 | 응답 충돌, 선택 피로 | 1역할 1에이전트 원칙 |
+| `~/.claude/agents/`에만 설치, 팀과 미공유 | 동료와 결과가 달라짐 | 프로젝트 `.claude/agents/`로 이동 + git 커밋 |
+| 레포 마지막 커밋 확인 안 함 | 낡은 라이브러리 버전 강요 | 3개월 이상 방치 레포는 피함 |
+| 라이선스 확인 안 함 | 사내 감사 시 문제 | 설치 체크리스트(§4-4) 필수 |
+| 자동 위임만 믿고 작업 시작 | 세션 중반에 엉뚱한 에이전트 활성화 | 초기엔 명시 호출만 |
+
+---
+
+## 8. 업데이트 · 유지보수
+
+### 정기 점검 (분기 1회)
+
+```
+[ ] 설치된 모든 에이전트 레포의 `git log` 확인
+[ ] 사용 안 한 에이전트 식별 → 제거
+[ ] 새 에이전트는 1개씩만 추가하며 관찰
+[ ] CLAUDE.md 의 "사용 중 에이전트" 목록 갱신
+[ ] 팀 단위면 공유 `.claude/agents/` 변경 이력 리뷰
+```
+
+### 변경 관리
+
+- 팀에서 에이전트를 추가/제거할 때는 **PR 머지 절차**를 거친다 (`.claude/agents/` 도 코드 리뷰 대상).
+- 중요한 변경은 `CHANGELOG.md` 또는 `docs/adr/` 에 **간단한 ADR**로 남긴다.
+
+---
+
+## 9. 관련 문서
+
+- [01-멀티에이전트패턴](./01-멀티에이전트패턴(multi-agent-patterns).md) — Orchestrator-Worker / Pipeline / Parallel / Debate
+- [02-역할기반협업](./02-역할기반협업(role-based).md) — Planner/Coder/Reviewer/Tester 4-role
+- [03-크로스에이전트핸드오프](./03-크로스에이전트핸드오프(cross-agent-handoff).md) — 도구 전환 시 컨텍스트 유지
+- [03-주요기능/05-서브에이전트](../../03-주요기능(features)/05-서브에이전트(subagents).md) — Claude Code 서브에이전트 기능 자체 설명
+- [07-최적화/04-비용관리](../../07-최적화(optimization)/04-비용관리(cost-management).md) — 에이전트 다수 사용 시 토큰 비용
+
