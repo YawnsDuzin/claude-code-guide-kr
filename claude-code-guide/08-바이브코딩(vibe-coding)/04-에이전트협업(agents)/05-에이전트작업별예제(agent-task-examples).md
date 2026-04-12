@@ -1574,3 +1574,430 @@ persona transitions:
 - auto-activation 을 끄지 않으면 workflow 가 persona 를 건너뛸 수 있음. `persona transitions` 를 명시.
 
 ---
+
+## 7. anthropics/skills
+
+공식 Anthropic 스킬. 서브에이전트가 아니라 **스킬(SKILL.md + 리소스)** 단위. 문서/개발/엔터프라이즈/디자인 4개 카테고리.
+
+> 이 레포는 "에이전트 호출" 이 아니라 "스킬 로드" 패턴입니다. 설치 후엔 Claude Code 가 대화 중 자동으로 스킬을 활성화합니다.
+
+### 프로젝트 설계 — anthropics/skills
+
+**사용 스킬:** `mcp-server-creator` (Development & Technical 카테고리) + 직접 프롬프트
+
+**환경 설정:**
+```bash
+git clone https://github.com/anthropics/skills.git /tmp/anthropics-skills
+mkdir -p ~/.claude/skills
+cp -r /tmp/anthropics-skills/skills/development/mcp-server-creator ~/.claude/skills/
+# 또는 플러그인 방식
+# /plugin marketplace add anthropics/skills
+# /plugin install mcp-server-creator@anthropics-skills
+```
+
+**실전 프롬프트:**
+```
+내 프로젝트에 MCP 서버를 붙이고 싶어. 설계 단계.
+
+맥락:
+- 프로젝트: [예: "내부 Notion DB 를 조회하는 MCP 서버"]
+- 언어: Node.js + TypeScript
+- 도구: Notion API + 자체 캐시
+
+mcp-server-creator 스킬을 참조해서 다음을 작성:
+1. MCP 서버의 역할 + 노출할 도구 목록 (tool names + schemas)
+2. 인증 방식 (Notion token 보관)
+3. 캐시 전략 (TTL, 무효화)
+4. 에러/재시도 정책
+5. 로컬 개발 + 배포(Systemd 또는 Docker) 단계
+
+파일 생성은 하지 말고 설계만.
+```
+
+**예상 산출물:** MCP 서버 설계 문서 1건 (도구 목록 + 인증 + 캐시 + 운영).
+
+**주의사항:**
+- 스킬은 SKILL.md 의 `description` 을 바탕으로 Claude 가 **자동 활성화** 함. 설계/분석 단계에서 활성화가 안 되면 프롬프트에 "mcp-server-creator 스킬 참조" 를 명시.
+- Document skills (docx/pdf/pptx/xlsx) 는 **source-available** — 사내 배포 전에 라이선스 조건을 확인.
+
+---
+
+### 코드 분석 — anthropics/skills
+
+**사용 스킬:** `webapp-testing` (Development & Technical 카테고리, 웹앱 품질 점검 템플릿)
+
+**환경 설정:**
+```bash
+cp -r /tmp/anthropics-skills/skills/development/webapp-testing ~/.claude/skills/
+```
+
+**실전 프롬프트:**
+```
+`webapp-testing` 스킬을 참조해서 이 웹앱의 현재 품질 상태를 분석한다.
+
+프로젝트: [예: Next.js 15 + tRPC + Postgres]
+관심 영역:
+- 핵심 플로우: 로그인 → 대시보드 → 설정
+- 기존 테스트: e2e 3건, 단위 47건 (커버리지 미측정)
+
+요구:
+1. webapp-testing 스킬의 체크리스트에 따라 미검증 항목 식별
+2. 우선순위 Top 5 (비즈니스 임팩트 기준)
+3. 각 항목에 대해 구현해야 할 테스트 유형 (단위/통합/E2E/접근성/성능)
+4. 4주 내 달성 가능한 목표 수치 (커버리지, E2E 수, lighthouse 점수)
+5. 파일 수정 금지 (진단만)
+```
+
+**예상 산출물:** 품질 진단 리포트 + Top 5 우선순위 + 4주 목표.
+
+**주의사항:**
+- anthropics/skills 의 스킬은 대부분 **템플릿·체크리스트 기반**. 직접 코드를 쓰지 않으므로 분석/진단에 강함.
+- 스킬이 자동 활성화되지 않으면 첫 줄에 스킬 이름을 명시하면 강제 활성화.
+
+---
+
+### 기능 코딩 — anthropics/skills
+
+**사용 스킬:** 직접 코딩보다 **문서 스킬** 로 산출물 생성 (`docx`, `xlsx`) — 코딩 자체는 일반 세션에서
+
+**환경 설정:**
+```bash
+cp -r /tmp/anthropics-skills/skills/document/docx ~/.claude/skills/
+cp -r /tmp/anthropics-skills/skills/document/xlsx ~/.claude/skills/
+```
+
+**실전 프롬프트:**
+```
+나는 [예: "주간 리포트 자동 생성 기능"] 을 구현하려 한다.
+
+Claude Code 의 docx 와 xlsx 스킬을 활용해:
+
+1. 리포트 템플릿 `.docx` 를 프로젝트에 추가 (docs/templates/weekly-report.template.docx)
+2. 동적 데이터를 채우는 Node.js 코드 (src/lib/report-generator.ts)
+3. 테스트 데이터로 실제 생성 → `tmp/sample-report.docx` 저장
+4. xlsx 로도 같은 데이터를 내보내기 (src/lib/report-generator-xlsx.ts)
+5. 사용 예: 단위 테스트 1개 + CLI 커맨드 예시
+
+제약:
+- docx/xlsx 스킬의 라이선스는 source-available — 재배포 코드에 포함하지 않는다 (스킬을 호출하는 코드만 작성).
+- 생성 로직은 순수 함수로 유지 (의존성 주입).
+```
+
+**예상 산출물:** 템플릿 파일 + 생성기 코드 + 샘플 파일 + 테스트.
+
+**주의사항:**
+- docx/xlsx 스킬은 **source-available** 로 재배포 금지. 프로젝트에서 스킬 자체를 벤더링하지 말고 **Claude Code 세션에서만** 사용.
+- 생성 결과물(파일 자체)은 자신의 저작물이므로 라이선스 제약 없음.
+
+---
+
+### 코드 리뷰 — anthropics/skills
+
+**사용 스킬:** 공식 `review-pr` 또는 유사 스킬 + 직접 프롬프트
+
+**환경 설정:**
+```bash
+# 리뷰용 스킬 이름은 버전에 따라 다름 — 레포 확인
+ls /tmp/anthropics-skills/skills/development/
+cp -r /tmp/anthropics-skills/skills/development/<review-*> ~/.claude/skills/
+```
+
+**실전 프롬프트:**
+```
+공식 리뷰 스킬을 참조해서 스테이징된 diff 를 점검한다.
+
+diff:
+```
+[git diff --staged 결과]
+```
+
+점검:
+1. Anthropic 의 공식 권장 패턴 (스킬 내부 체크리스트)
+2. 보안 — 사용자 입력 검증, 인증/인가
+3. 관측성 — 실패 경로 로깅
+4. 안전성 — 실수로 사용자 데이터에 영향 주는 변경이 있는가
+5. CLAUDE.md 규칙
+
+출력:
+- 섹션별 OK/문제
+- 머지 가능/조건부/반려
+- 조건부면 고쳐야 할 것 3개
+```
+
+**예상 산출물:** 공식 스킬 기준의 리뷰 리포트.
+
+**주의사항:**
+- 공식 스킬은 **보수적** — false-positive 가 적지만 커버리지도 제한적. 보안 전담 에이전트와 병행 권장.
+- 스킬 이름은 레포 업데이트에 따라 변할 수 있으니 `ls` 로 실제 이름 확인.
+
+---
+
+### 테스트 자동화 — anthropics/skills
+
+**사용 스킬:** `webapp-testing`
+
+**환경 설정:** 위 "코드 분석" 과 동일.
+
+**실전 프롬프트:**
+```
+`webapp-testing` 스킬의 테스트 카탈로그를 기반으로,
+다음 페이지에 E2E 테스트 3개를 추가한다.
+
+대상: /app/(dashboard)/settings/page.tsx
+기존 E2E: 없음
+도구: Playwright
+
+webapp-testing 카탈로그에서 다음에 해당하는 항목 선택:
+- Happy path (성공 경로)
+- Form validation (필드 검증)
+- Authorization (권한 없는 접근 시 리다이렉트)
+
+각 테스트:
+- data-testid 기반 selector 사용 (텍스트 아님)
+- 각 테스트 독립 (전역 상태 오염 없음)
+- 실행 시간 5초 이하
+- `pnpm test:e2e settings` 로 실행 후 결과 출력
+```
+
+**예상 산출물:** Playwright 테스트 3개 + 실행 결과.
+
+**주의사항:**
+- `webapp-testing` 스킬은 카탈로그 제공이 핵심. **사용자가 항목을 고르지 않으면** 스킬이 모든 항목을 나열만 하고 끝날 수 있음.
+- 공식 스킬은 **도구 선택을 강요하지 않음** — Playwright / Cypress / Puppeteer 중 사용할 것을 명시 필수.
+
+---
+
+### 멀티 에이전트 협업 — anthropics/skills
+
+**사용 스킬:** 여러 스킬을 **하나의 세션에서 순차 활성화**. 별도 오케스트레이터 없음.
+
+**환경 설정:**
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+cp -r /tmp/anthropics-skills/skills/development/mcp-server-creator ~/.claude/skills/
+cp -r /tmp/anthropics-skills/skills/development/webapp-testing ~/.claude/skills/
+cp -r /tmp/anthropics-skills/skills/document/docx ~/.claude/skills/
+```
+
+**실전 프롬프트:**
+```
+작업: [예: "내부 Notion MCP 서버 구축 + 품질 리포트 자동 생성"]
+
+3개 스킬을 순차 활용한다:
+
+Phase 1 — mcp-server-creator
+- 설계 문서 + 코드 생성 (src/mcp-notion/)
+- 내 승인 후 다음 단계
+
+Phase 2 — webapp-testing
+- Phase 1 산출물에 대한 테스트 카탈로그 적용
+- 단위 + E2E 테스트 작성
+
+Phase 3 — docx
+- Phase 1~2 전체 내용을 `docs/reports/mcp-rollout.docx` 로 리포트 생성
+- 섹션: 요약 / 아키텍처 / 테스트 / 운영 / 오픈 이슈
+
+규칙:
+- 각 phase 는 별도의 "컨텍스트" — 이전 phase 의 파일만 참조
+- 스킬이 동시에 활성화되지 않도록 세션 상태를 분리
+- phase 종료 시 `planning/mcp-rollout.md` 에 진행 상태 기록
+```
+
+**예상 산출물:** 3단계 산출물 (코드 + 테스트 + docx 리포트) + planning 파일.
+
+**주의사항:**
+- 스킬 기반 "멀티 에이전트" 는 엄밀히는 **멀티 스킬 순차 활용**. 진짜 병렬 처리는 wshobson/VoltAgent 에 비해 약함.
+- docx 스킬은 source-available 이므로 프로덕션 코드에 벤더링하지 말 것.
+
+---
+
+## 8. hesreallyhim/awesome-claude-code
+
+**메타 큐레이션 리스트**. 레포 자체를 설치하지 않음. 다른 레포를 발견/선택하는 용도.
+
+> 이 섹션의 "실전 프롬프트" 는 모두 **선택·탐색용** 입니다. 최종 설치·실행은 발견한 레포의 방식을 따르세요.
+
+### 프로젝트 설계 — hesreallyhim
+
+**사용 방식:** 리스트 탐색 + 선택
+
+**환경 설정:** 설치 없음. 브라우저로 리스트 열람.
+
+**실전 프롬프트 (Claude Code 세션에서 리스트 읽기):**
+```
+다음 파일을 읽고 "설계 단계에 쓸 만한 에이전트/스킬" 을 5개 추려라.
+
+파일: https://raw.githubusercontent.com/hesreallyhim/awesome-claude-code/main/README.md
+
+선정 기준:
+- "architecture / design / PRD / ADR" 키워드
+- 최근 업데이트 (1년 이내)
+- MIT/Apache 라이선스 (사내 반입 가능)
+
+출력:
+| 이름 | 소속 레포 | 간단 설명 | 설치 방법 | 예상 활용 |
+|------|---------|---------|---------|---------|
+| ... | ... | ... | ... | ... |
+
+내가 선택하면 그때 설치 방법을 상세히 알려줘.
+```
+
+**예상 산출물:** 5개 후보 표 + 각각의 한 줄 설명.
+
+**주의사항:**
+- 리스트는 **품질 편차** 가 있음. 반드시 각 레포의 README + 마지막 커밋 날짜 확인.
+- WebFetch 도구를 Claude Code 가 쓸 수 있어야 함 (네트워크 허용).
+
+---
+
+### 코드 분석 — hesreallyhim
+
+**사용 방식:** "Tooling" 섹션에서 코드 분석/시각화 도구 탐색
+
+**실전 프롬프트:**
+```
+hesreallyhim/awesome-claude-code 의 "Tooling" 섹션을 조회하고,
+다음 요건에 맞는 3개 도구를 추천한다.
+
+요건:
+- 대형 레포(10만 LOC+)의 구조를 시각화할 수 있는 것
+- 타입스크립트 + Python 혼합 프로젝트 지원
+- CLI 또는 VS Code 플러그인
+- 오픈소스
+
+출력:
+- 각 도구의 이름, 출처, 설치 방법, 사용 예
+- 3개 중 1순위 추천 + 이유
+- 설치 전 주의사항
+```
+
+**예상 산출물:** 3개 도구 비교 + 1순위 추천.
+
+**주의사항:**
+- awesome 리스트의 "Tooling" 섹션은 "범용 유틸" 과 "Claude 전용" 이 섞여 있음. 선정 기준을 Claude 와 무관한 것까지 넓히면 혼선.
+
+---
+
+### 기능 코딩 — hesreallyhim
+
+**사용 방식:** "CLAUDE.md Files" 섹션에서 언어·도메인 특화 템플릿 찾기
+
+**실전 프롬프트:**
+```
+나는 Rust + Axum + Postgres 프로젝트를 시작한다.
+
+hesreallyhim/awesome-claude-code 의 "CLAUDE.md Files" 섹션을 조회해:
+1. Rust 또는 Axum 관련 CLAUDE.md 샘플을 찾아라
+2. 가장 잘 쓰인 것 2개를 선정 (명령형 어투 + 금지 규칙 포함)
+3. 그 중 하나를 내 프로젝트용으로 수정 (스택 맞춤)
+4. CLAUDE.md 생성 후 `cargo check` 와 `cargo test` 명령 섹션 추가
+5. 최종본을 프로젝트 루트에 저장
+
+제약:
+- 원본 저작권 표기 유지
+- 내 프로젝트 특성(모노레포/싱글크레이트 등)을 반영
+```
+
+**예상 산출물:** 커뮤니티 CLAUDE.md 기반의 맞춤 버전.
+
+**주의사항:**
+- 커뮤니티 템플릿은 라이선스가 다양. 수정·재배포 전 원본 라이선스 확인.
+- 스택이 최신이 아니면 (예: `tokio 0.2`) 현재 버전에 맞게 명령을 업데이트.
+
+---
+
+### 코드 리뷰 — hesreallyhim
+
+**사용 방식:** "Workflows & Knowledge Guides" → 리뷰 관련 가이드 찾기
+
+**실전 프롬프트:**
+```
+awesome-claude-code 의 "Workflows & Knowledge Guides" 섹션에서
+"code review" 관련 가이드 3개를 찾아 비교한다.
+
+각 가이드에 대해:
+1. 어떤 리뷰 접근(체크리스트/자동/AI-first)을 제안하는가
+2. 의존하는 도구나 에이전트 (wshobson/VoltAgent 등 어디 기반인가)
+3. 내 프로젝트(Next.js + Postgres, 2인 팀)에 맞는가
+4. 바로 적용 가능한 체크리스트 3개 문장
+
+추천:
+- 3개 중 1순위 채택 이유
+- 내 팀에 맞춘 5분 버전으로 축약
+```
+
+**예상 산출물:** 3개 가이드 비교 + 팀 맞춤 축약본.
+
+**주의사항:**
+- Workflows 섹션은 개인 블로그/Gist 링크가 많음. 링크 사라짐(link rot) 주의.
+- 채택 전 **원문을 반드시 읽기** — 요약만으로 판단하면 누락되는 맥락 많음.
+
+---
+
+### 테스트 자동화 — hesreallyhim
+
+**사용 방식:** "Slash-Commands" 섹션에서 테스트 관련 커맨드 탐색
+
+**실전 프롬프트:**
+```
+awesome-claude-code 의 "Slash-Commands" 섹션에서
+테스트 자동화 관련 커맨드 5개를 추려라.
+
+요건:
+- 각 커맨드가 어느 레포에 있고 어떻게 설치하는지
+- Vitest / Jest / Playwright 중 어느 것을 지원하는가
+- 설치 후 프로젝트에 영향(다른 훅/에이전트와 충돌)
+- "테스트 생성 → 실행 → 커버리지 리포트" 전 과정을 한 커맨드로 처리하는 게 있다면 우선
+
+출력:
+| 커맨드 | 레포 | 지원 도구 | 설치 | 장점 | 위험 |
+
+1순위 선정 후 설치 단계와 초기 사용 예시 제공.
+```
+
+**예상 산출물:** 5개 커맨드 비교 표 + 1순위 추천 + 초기 사용 가이드.
+
+**주의사항:**
+- 슬래시 커맨드는 프로젝트마다 **충돌 가능성**이 있음 (같은 이름, 다른 동작). 설치 전 `/plugin list` 또는 `.claude/commands/` 확인.
+- 커맨드가 내부에서 임의 코드 실행을 시도할 수 있으므로 설치 전 **소스 코드 리뷰 필수**.
+
+---
+
+### 멀티 에이전트 협업 — hesreallyhim
+
+**사용 방식:** "Workflows & Knowledge Guides → Teams" 섹션에서 팀 구성 패턴 찾기
+
+**환경 설정:**
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+```
+
+**실전 프롬프트:**
+```
+awesome-claude-code 의 "Workflows > Teams" 하위에서
+"multi-agent orchestration" 예시를 2개 찾아라.
+
+각 예시에 대해:
+1. 어떤 에이전트들을 팀으로 묶는가 (역할 목록)
+2. 통신 방식 (파일 기반 / 메모리 / 오케스트레이터)
+3. 장점 / 한계
+4. 내 프로젝트에 적용 가능한가
+   - 내 스택: Next.js + Postgres
+   - 내 팀 크기: 솔로
+   - 내 작업: [예: "결제 모듈 리라이트"]
+
+출력:
+- 2개 예시 비교
+- 내 상황에 맞는 1개 채택
+- 채택한 예시의 팀 구성을 내 에이전트 세트(예: wshobson/lst97)로 매핑
+- 각 에이전트 호출 순서 + 역할
+```
+
+**예상 산출물:** 팀 패턴 비교 + 매핑 + 내 환경 적용 가이드.
+
+**주의사항:**
+- awesome-claude-code 에서 찾은 팀 패턴은 **원본 저자 환경 전제** 로 작성된 경우가 많음. 그대로 복사하면 내 환경에서 작동 안 할 수 있음.
+- 매핑 단계에서 에이전트 이름/역할이 서로 다를 수 있으므로 **나의 기존 에이전트 목록** 을 프롬프트에 먼저 제공.
+
+---
+
