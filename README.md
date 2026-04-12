@@ -69,10 +69,8 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 
 ### 07. 최적화
 - [프롬프트 엔지니어링](./claude-code-guide/07-최적화(optimization)/01-프롬프트엔지니어링(prompt-engineering).md) - 효과적인 지시 방법
-- [CLAUDE.md 작성법](./claude-code-guide/07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md) - 프로젝트 설정 최적화
-- [성능 최적화](./claude-code-guide/07-최적화(optimization)/03-성능최적화(performance).md) - 속도, 정확도 개선
-- [비용 관리](./claude-code-guide/07-최적화(optimization)/04-비용관리(cost-management).md) - 토큰 절약, 비용 절감
-- [CLAUDE.md 템플릿](./claude-code-guide/07-최적화(optimization)/05-CLAUDE-MD템플릿(claude-md-templates).md) - React, Python, Java 등 프로젝트별 템플릿
+- [CLAUDE.md 작성법 및 템플릿](./claude-code-guide/07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md) - 작성 원칙 + 프로젝트별 실전 템플릿
+- [성능 및 비용 최적화](./claude-code-guide/07-최적화(optimization)/03-성능최적화(performance).md) - 속도·정확도 개선 + 토큰 절약·비용 관리
 - [문서 종류 분류](./claude-code-guide/07-최적화(optimization)/06-문서종류분류(document-types).md) - 필수 4종 / 권장 3종 / 불필요 5종
 - [에이전트 친화 포맷](./claude-code-guide/07-최적화(optimization)/07-에이전트친화포맷(agent-friendly-formats).md) - Markdown + Mermaid 원칙 + 문서 종류별 포맷 매칭표
 
@@ -83,7 +81,7 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 - [01. 빠른 시작](./claude-code-guide/08-바이브코딩(vibe-coding)/01-빠른시작(quickstart).md) - 5단계 초기화 (CLAUDE.md → PRD → arch → ERD → dev)
 - [02. 프롬프트 템플릿](./claude-code-guide/08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/) - 범용 + 7가지 작업 유형별 재사용 템플릿
 - [03. 문서 템플릿](./claude-code-guide/08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/) - CLAUDE.md / PRD / architecture / erd / feature-spec
-- [04. 에이전트 협업](./claude-code-guide/08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/) - 멀티 에이전트 패턴, 4-role 협업, 크로스 에이전트 핸드오프, **인기 에이전트 레포 비교·선택 가이드**
+- [04. 에이전트 협업](./claude-code-guide/08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/) - 멀티 에이전트 패턴, 4-role 협업, 크로스 에이전트 핸드오프, **인기 에이전트 레포 비교·선택 가이드**, **작업별 복붙 예제 48종**
 - [05. 엔드투엔드 예제](./claude-code-guide/08-바이브코딩(vibe-coding)/05-예제(examples)/) - 기능 개발 + 멀티 에이전트 파이프라인 실사례
 
 → 시작하려면 **[08-바이브코딩/01-빠른시작](./claude-code-guide/08-바이브코딩(vibe-coding)/01-빠른시작(quickstart).md)** 5분 가이드.
@@ -130,6 +128,24 @@ cd your-project
 # 3. Claude Code 실행
 claude
 ```
+
+---
+
+## 문서 구조 변경 이력
+
+### 2026-04-12: 중복·통합 정리
+
+77개 문서 전수 분석 후 29건의 중복·겹침·산재 이슈를 정리했습니다.
+
+| 변경 | 내용 |
+|------|------|
+| **07-05 삭제** | `CLAUDE.md 템플릿` → `02-CLAUDE.md 작성법`에 병합 |
+| **07-04 삭제** | `비용관리` → `03-성능최적화`에 병합 → `성능 및 비용 최적화`로 통합 |
+| **FAQ 축소** | 트러블슈팅 섹션 제거 → `02-문제해결` 링크로 대체 |
+| **06 비교 축소** | 3개 파일의 반복 Claude Code 설명 축약, `04-선택가이드` 참조로 통일 |
+| **Git 문서 분리** | `06-Git기본사용법`을 순수 Git 레퍼런스로, Claude Code 프롬프트는 `05-Git워크플로우`로 일원화 |
+| **04↔08 중복 정리** | 워크플로우 플레이북(08~11)의 상세 예시 축약, `08-바이브코딩` 프롬프트 템플릿 링크로 대체 |
+| **CLAUDE.md 일원화** | 9곳에 산재한 CLAUDE.md 설명을 `03-01-메모리` + `07-02-작성법`으로 정본 지정, 나머지 축약+링크 |
 
 ---
 

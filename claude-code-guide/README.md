@@ -60,10 +60,8 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 
 ### 07. 최적화
 - [프롬프트 엔지니어링](./07-최적화(optimization)/01-프롬프트엔지니어링(prompt-engineering).md) - 효과적인 지시 방법
-- [CLAUDE.md 작성법](./07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md) - 프로젝트 설정 최적화
-- [성능 최적화](./07-최적화(optimization)/03-성능최적화(performance).md) - 속도, 정확도 개선
-- [비용 관리](./07-최적화(optimization)/04-비용관리(cost-management).md) - 토큰 절약, 비용 절감
-- [CLAUDE.md 템플릿](./07-최적화(optimization)/05-CLAUDE-MD템플릿(claude-md-templates).md) - React, Python, Java 등 프로젝트별 템플릿
+- [CLAUDE.md 작성법 및 템플릿](./07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md) - 작성 원칙 + 프로젝트별 실전 템플릿
+- [성능 및 비용 최적화](./07-최적화(optimization)/03-성능최적화(performance).md) - 속도, 정확도 개선 + 토큰 절약, 비용 절감
 - [문서 종류 분류](./07-최적화(optimization)/06-문서종류분류(document-types).md) - 필수 4종 / 권장 3종 / 불필요 5종
 - [에이전트 친화 포맷](./07-최적화(optimization)/07-에이전트친화포맷(agent-friendly-formats).md) - Markdown + Mermaid + 문서 종류별 포맷 매칭표
 
@@ -74,7 +72,7 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 - [01. 빠른 시작](./08-바이브코딩(vibe-coding)/01-빠른시작(quickstart).md) - 5단계 초기화
 - [02. 프롬프트 템플릿](./08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/) - 범용 + 7가지 작업 유형별
 - [03. 문서 템플릿](./08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/) - CLAUDE / PRD / architecture / erd / feature-spec
-- [04. 에이전트 협업](./08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/) - 멀티 에이전트 패턴, 4-role, 핸드오프, **인기 에이전트 레포 비교·선택 가이드**
+- [04. 에이전트 협업](./08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/) - 멀티 에이전트 패턴, 4-role, 핸드오프, **인기 에이전트 레포 비교·선택 가이드**, **작업별 복붙 예제 48종**
 - [05. 엔드투엔드 예제](./08-바이브코딩(vibe-coding)/05-예제(examples)/) - 기능 개발 + 멀티 에이전트 파이프라인 사례
 
 ### 99. 부록

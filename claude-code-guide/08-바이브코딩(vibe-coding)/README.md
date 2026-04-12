@@ -41,7 +41,8 @@
 │   ├── 01-멀티에이전트패턴(multi-agent-patterns).md   Orchestrator/Pipeline/Parallel/Debate
 │   ├── 02-역할기반협업(role-based).md      Planner/Coder/Reviewer/Tester
 │   ├── 03-크로스에이전트핸드오프(cross-agent-handoff).md
-│   └── 04-인기에이전트레포(popular-agent-repos).md   wshobson/VoltAgent/0xfurai/... 비교 + 선택 가이드
+│   ├── 04-인기에이전트레포(popular-agent-repos).md   wshobson/VoltAgent/0xfurai/... 비교 + 선택 가이드
+│   └── 05-에이전트작업별예제(agent-task-examples).md  8 repos × 6 scenarios = 48개 복붙 예제
 └── 05-예제(examples)/                     엔드투엔드 워크스루
     ├── README.md
     ├── 01-기능개발예제(feature-walkthrough).md     기능 1개를 80분 4커밋으로

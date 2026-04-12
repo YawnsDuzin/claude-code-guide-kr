@@ -50,11 +50,7 @@ git remote add origin https://github.com/user/repo.git
 git clone https://github.com/user/repo.git
 ```
 
-**Claude Code에서:**
-```
-"이 프로젝트를 git 저장소로 초기화하고 .gitignore를 만들어줘"
-"https://github.com/user/repo.git 클론해줘"
-```
+> Claude Code 활용법은 [05-Git워크플로우](./05-Git워크플로우(git-workflow).md)를 참조하세요.
 
 ### 변경사항 확인 & 커밋
 
@@ -67,11 +63,7 @@ git commit -m "메시지"         # 커밋
 git log --oneline             # 커밋 히스토리 보기
 ```
 
-**Claude Code에서:**
-```
-"현재 변경사항을 확인해줘"
-/commit                        # 자동으로 변경사항 분석 후 커밋
-```
+> Claude Code 활용법은 [05-Git워크플로우](./05-Git워크플로우(git-workflow).md)를 참조하세요.
 
 ### 브랜치 다루기
 
@@ -83,11 +75,7 @@ git switch -c feature/login    # 생성 + 이동 동시에
 git branch -d feature/login    # 브랜치 삭제
 ```
 
-**Claude Code에서:**
-```
-"로그인 기능을 위한 브랜치를 만들어줘"
-"main 브랜치로 이동해줘"
-```
+> Claude Code 활용법은 [05-Git워크플로우](./05-Git워크플로우(git-workflow).md)를 참조하세요.
 
 ### 합치기: Merge vs Rebase
 
@@ -112,11 +100,7 @@ git switch feature/login
 git rebase main
 ```
 
-**Claude Code에서:**
-```
-"feature/login 브랜치를 main에 머지해줘"
-"현재 브랜치를 main 기준으로 rebase 해줘"
-```
+> Claude Code 활용법은 [05-Git워크플로우](./05-Git워크플로우(git-workflow).md)를 참조하세요.
 
 ### 원격 저장소 작업
 
@@ -127,11 +111,7 @@ git pull origin main           # 원격에서 가져오기
 git fetch origin               # 가져오기만 (합치지 않음)
 ```
 
-**Claude Code에서:**
-```
-"현재 브랜치를 원격에 푸시해줘"
-"main 브랜치의 최신 변경사항을 가져와줘"
-```
+> Claude Code 활용법은 [05-Git워크플로우](./05-Git워크플로우(git-workflow).md)를 참조하세요.
 
 ### 되돌리기
 
@@ -150,13 +130,7 @@ git reset --soft HEAD~1   # 변경사항 유지, 커밋만 취소
 git reset --hard HEAD~1   # 변경사항도 삭제 (위험!)
 ```
 
-**Claude Code에서:**
-```
-"마지막 커밋을 되돌려줘"          # revert 사용 (안전)
-"방금 커밋한 것을 취소해줘"        # reset --soft 사용
-```
-
-> Claude Code는 위험한 작업(reset --hard 등) 전에 반드시 확인을 요청합니다.
+> Claude Code 활용법은 [05-Git워크플로우](./05-Git워크플로우(git-workflow).md)를 참조하세요.
 
 ### 임시 저장 (Stash)
 
@@ -166,11 +140,7 @@ git stash list                # 저장 목록 보기
 git stash pop                 # 가장 최근 저장 꺼내기
 ```
 
-**Claude Code에서:**
-```
-"현재 작업을 임시 저장하고 main으로 이동해줘"
-"임시 저장한 작업을 다시 가져와줘"
-```
+> Claude Code 활용법은 [05-Git워크플로우](./05-Git워크플로우(git-workflow).md)를 참조하세요.
 
 ---
 
@@ -393,17 +363,7 @@ dist/
 .DS_Store
 ```
 
-### Claude Code /commit 활용 팁
-
-```
-# 자동 커밋 메시지 생성
-/commit
-
-# 커밋 전에 CLAUDE.md에 규칙 추가하면 자동 적용
-# CLAUDE.md 예시:
-# 커밋 메시지는 Conventional Commits 형식을 사용합니다.
-# 커밋 메시지 본문은 한국어로 작성합니다.
-```
+> `/commit` 활용법과 커밋 메시지 자동 생성에 대한 자세한 내용은 [05-Git워크플로우](./05-Git워크플로우(git-workflow).md)를 참조하세요.
 
 ---
 

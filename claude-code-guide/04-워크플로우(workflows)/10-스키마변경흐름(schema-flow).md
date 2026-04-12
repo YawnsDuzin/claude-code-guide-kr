@@ -32,40 +32,7 @@ flowchart TD
 
 ## Before / After ERD 비교
 
-프롬프트에 **반드시** 두 다이어그램을 함께 넣습니다.
-
-### 현재 (Before)
-
-```mermaid
-erDiagram
-    USER {
-        uuid id PK
-        string email
-        string name
-    }
-```
-
-### 목표 (After)
-
-```mermaid
-erDiagram
-    USER {
-        uuid id PK
-        string email UK
-        string display_name
-        string legal_name "신규"
-        datetime deleted_at "소프트 삭제 신규"
-    }
-```
-
-### 변경 요약
-
-| 컬럼 | 변경 유형 | 비고 |
-|------|----------|------|
-| email | UNIQUE 제약 추가 | 기존 중복 데이터 정리 필요 |
-| name → display_name | 이름 변경 | 코드 전역 변경 |
-| legal_name | 신규 | NULLable로 추가 |
-| deleted_at | 신규 | 소프트 삭제 도입 |
+프롬프트에 **반드시** 현재(Before)와 목표(After) ERD 다이어그램을 함께 넣고, 컬럼별 변경 유형을 요약합니다. 두 상태를 나란히 보여줘야 에이전트가 정확한 마이그레이션을 생성합니다.
 
 ---
 
@@ -73,20 +40,13 @@ erDiagram
 
 호환 안 되는 변경은 **반드시** 3단계로 나눕니다.
 
-```
-Expand (배포 1):
-  - 새 컬럼/테이블 추가 (기존과 병존)
-  - 코드: 양쪽 모두 읽기, 새 쪽에 쓰기
-
-Migrate (배포 2 + 백필):
-  - 기존 데이터 백필 스크립트
-  - 코드: 새 쪽에서만 읽기
-
-Contract (배포 3):
-  - 기존 컬럼/테이블 제거
-```
+1. **Expand** — 새 컬럼/테이블을 추가하고 기존과 병존시킵니다.
+2. **Migrate** — 기존 데이터를 백필하고 새 쪽에서만 읽도록 전환합니다.
+3. **Contract** — 기존 컬럼/테이블을 제거합니다.
 
 단일 배포로 스키마와 코드를 동시에 바꾸면, 롤백 시 데이터 손실이 발생합니다.
+
+> 상세 ERD 예시, SQL 코드, 체크리스트는 [08-바이브코딩/02-프롬프트템플릿/04-스키마마이그레이션](../08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/04-스키마마이그레이션(schema).md)을 참조하세요.
 
 ---
 
