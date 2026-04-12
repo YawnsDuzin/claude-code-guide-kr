@@ -22,6 +22,7 @@
 | [02-역할기반협업(role-based).md](./02-역할기반협업(role-based).md) | Planner / Coder / Reviewer / Tester 역할 정의 + 프롬프트 |
 | [03-크로스에이전트핸드오프(cross-agent-handoff).md](./03-크로스에이전트핸드오프(cross-agent-handoff).md) | Claude Code ↔ Codex ↔ Cursor ↔ 사람 간 컨텍스트 전달 프로토콜 |
 | [04-인기에이전트레포(popular-agent-repos).md](./04-인기에이전트레포(popular-agent-repos).md) | wshobson / VoltAgent / 0xfurai / davepoon / lst97 / SuperClaude / anthropics/skills 비교 + 프로젝트·스택·워크플로우별 선택 가이드 + 설치 패턴 + 보안 주의 + 추천 스타터 세트 3종 |
+| [05-에이전트작업별예제(agent-task-examples).md](./05-에이전트작업별예제(agent-task-examples).md) | 8개 레포 × 6개 작업 시나리오 (설계/분석/코딩/리뷰/테스트/멀티에이전트) = **48개 복붙 예제**. 환경 설정 + 프롬프트 + 산출물 + 주의사항 |
 
 ## 시작 경로
 
@@ -30,6 +31,7 @@
 3. 낯선 코드베이스 + 고위험 변경: [02-역할기반협업](./02-역할기반협업(role-based).md)의 4-role
 4. 여러 도구 병용: [03-크로스에이전트핸드오프](./03-크로스에이전트핸드오프(cross-agent-handoff).md)의 핸드오프 프로토콜
 5. **"어떤 에이전트 레포를 설치할까?"**: [04-인기에이전트레포](./04-인기에이전트레포(popular-agent-repos).md) §3 선택 가이드 + §6 스타터 프리셋
+6. **"오늘 이 작업에 어떻게 호출하지?"**: [05-에이전트작업별예제](./05-에이전트작업별예제(agent-task-examples).md) 에서 자신의 레포 섹션 → 작업 시나리오 찾아 복붙
 
 ## 관련 기능
 
