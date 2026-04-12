@@ -83,7 +83,7 @@ Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
 - [01. 빠른 시작](./claude-code-guide/08-바이브코딩(vibe-coding)/01-빠른시작(quickstart).md) - 5단계 초기화 (CLAUDE.md → PRD → arch → ERD → dev)
 - [02. 프롬프트 템플릿](./claude-code-guide/08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/) - 범용 + 7가지 작업 유형별 재사용 템플릿
 - [03. 문서 템플릿](./claude-code-guide/08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/) - CLAUDE.md / PRD / architecture / erd / feature-spec
-- [04. 에이전트 협업](./claude-code-guide/08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/) - 멀티 에이전트 패턴, 4-role 협업, 크로스 에이전트 핸드오프
+- [04. 에이전트 협업](./claude-code-guide/08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/) - 멀티 에이전트 패턴, 4-role 협업, 크로스 에이전트 핸드오프, **인기 에이전트 레포 비교·선택 가이드**
 - [05. 엔드투엔드 예제](./claude-code-guide/08-바이브코딩(vibe-coding)/05-예제(examples)/) - 기능 개발 + 멀티 에이전트 파이프라인 실사례
 
 → 시작하려면 **[08-바이브코딩/01-빠른시작](./claude-code-guide/08-바이브코딩(vibe-coding)/01-빠른시작(quickstart).md)** 5분 가이드.

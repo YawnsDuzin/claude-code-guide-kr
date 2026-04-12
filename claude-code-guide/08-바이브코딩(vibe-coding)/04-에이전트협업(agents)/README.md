@@ -21,6 +21,7 @@
 | [01-멀티에이전트패턴(multi-agent-patterns).md](./01-멀티에이전트패턴(multi-agent-patterns).md) | Orchestrator-Worker / Pipeline / Parallel / Debate 4가지 패턴 |
 | [02-역할기반협업(role-based).md](./02-역할기반협업(role-based).md) | Planner / Coder / Reviewer / Tester 역할 정의 + 프롬프트 |
 | [03-크로스에이전트핸드오프(cross-agent-handoff).md](./03-크로스에이전트핸드오프(cross-agent-handoff).md) | Claude Code ↔ Codex ↔ Cursor ↔ 사람 간 컨텍스트 전달 프로토콜 |
+| [04-인기에이전트레포(popular-agent-repos).md](./04-인기에이전트레포(popular-agent-repos).md) | wshobson / VoltAgent / 0xfurai / davepoon / lst97 / SuperClaude / anthropics/skills 비교 + 프로젝트·스택·워크플로우별 선택 가이드 + 설치 패턴 + 보안 주의 + 추천 스타터 세트 3종 |
 
 ## 시작 경로
 
@@ -28,6 +29,7 @@
 2. 3~5파일 작업: [01-멀티에이전트패턴](./01-멀티에이전트패턴(multi-agent-patterns).md) §Pipeline
 3. 낯선 코드베이스 + 고위험 변경: [02-역할기반협업](./02-역할기반협업(role-based).md)의 4-role
 4. 여러 도구 병용: [03-크로스에이전트핸드오프](./03-크로스에이전트핸드오프(cross-agent-handoff).md)의 핸드오프 프로토콜
+5. **"어떤 에이전트 레포를 설치할까?"**: [04-인기에이전트레포](./04-인기에이전트레포(popular-agent-repos).md) §3 선택 가이드 + §6 스타터 프리셋
 
 ## 관련 기능
 
