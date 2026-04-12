@@ -571,3 +571,531 @@ export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 - 4명 이상 병렬은 토큰 소모가 크고 충돌도 잦음. 팀 인원은 4명 이하로 유지.
 
 ---
+
+## 3. 0xfurai/claude-code-subagents
+
+플러그인 마켓 미지원. 레포 클론 후 `~/.claude/agents/` 에 직접 복사. 일관된 포맷, 모델 자동 매핑.
+
+### 프로젝트 설계 — 0xfurai
+
+**사용 에이전트:** `system-architect` (신규 시스템 설계 전담)
+
+**환경 설정:**
+```bash
+git clone https://github.com/0xfurai/claude-code-subagents.git /tmp/0xfurai
+mkdir -p ~/.claude/agents
+cp /tmp/0xfurai/agents/system-architect.md ~/.claude/agents/
+cp /tmp/0xfurai/agents/database-architect.md ~/.claude/agents/
+```
+
+**CLAUDE.md 설정:**
+```markdown
+## 아키텍처 결정 원칙
+- 3rd-party 선택은 ADR 로 기록
+- 모든 외부 통합은 어댑터 패턴 (교체 가능성 확보)
+```
+
+**실전 프롬프트:**
+```
+@system-architect
+
+새 서비스 설계 요청.
+
+목적: [예: "실시간 알림 허브 — 웹/모바일/이메일 3채널 팬아웃"]
+
+제약:
+- 언어: Go
+- 배포: AWS ECS Fargate + RDS Postgres + SQS
+- 예상 QPS: 500 (피크), 평균 50
+- SLO: 알림 생성 → 발송 p95 < 3초
+- 장애 허용: 단일 AZ 다운 시에도 동작
+
+산출물:
+1. 고수준 아키텍처 (Mermaid flowchart, 6~10 노드)
+2. 핵심 데이터 흐름 2개 (알림 생성 / 읽음 처리)
+3. 큐 토폴로지 + DLQ 전략
+4. 단일 장애점 Top 3 + 완화책
+5. 운영 지표 (RED: Rate/Errors/Duration)
+6. 코드는 작성하지 말 것
+```
+
+**예상 산출물:** 설계 문서 1건 (Mermaid 2장 + 토폴로지 + 지표 목록). 약 1,500 토큰.
+
+**주의사항:**
+- 0xfurai 는 **모델 자동 매핑** 으로 설계 같은 복잡 작업에 상위 모델을 쓰려 함. 토큰 예산 주의.
+- 에이전트 파일을 열어서 system prompt 하단의 "Output Guidelines" 를 확인하면 산출물 형식 예측 가능.
+
+---
+
+### 코드 분석 — 0xfurai
+
+**사용 에이전트:** `code-analyzer` + `dependency-analyst`
+
+**환경 설정:**
+```bash
+cp /tmp/0xfurai/agents/code-analyzer.md ~/.claude/agents/
+cp /tmp/0xfurai/agents/dependency-analyst.md ~/.claude/agents/
+```
+
+**실전 프롬프트:**
+```
+@code-analyzer
+
+읽기 전용으로 `src/` 전체 구조를 파악한다.
+
+출력:
+1. 레이어 검증 — Presentation / Domain / Repository 가 일관되게 분리돼 있는가? 위반 5개까지
+2. 순환 의존 — import 그래프에서 사이클 탐지 (파일:파일 쌍)
+3. God object 후보 — 한 파일에 3개 이상의 책임을 가진 것 Top 5
+4. 테스트 미비 영역 — 테스트 없는 공개 함수 Top 10
+5. 각 항목은 파일:라인 근거 필수
+
+수정 금지. 파일을 만들지도 마라.
+```
+
+**예상 산출물:** 구조 진단 리포트 (4개 섹션 + 근거).
+
+**주의사항:**
+- 0xfurai 에이전트는 "quality checklist" 섹션을 내장해서 출력이 일관적. 결과를 `docs/audit/*.md` 로 바로 보존하기 좋음.
+- 의존성 그래프를 Mermaid 로 그려주지 않을 수 있음. "Mermaid 로 표현" 명시 권장.
+
+---
+
+### 기능 코딩 — 0xfurai
+
+**사용 에이전트:** `typescript-expert` + `postgres-specialist`
+
+**환경 설정:**
+```bash
+cp /tmp/0xfurai/agents/typescript-expert.md ~/.claude/agents/
+cp /tmp/0xfurai/agents/postgres-specialist.md ~/.claude/agents/
+```
+
+**실전 프롬프트:**
+```
+@postgres-specialist → @typescript-expert 순서로 진행.
+
+## 단계 1: @postgres-specialist
+스키마 변경: `notification` 테이블 추가
+- id uuid PK, user_id FK, channel enum, payload jsonb, status enum, created_at, sent_at
+- 인덱스: (user_id, created_at desc), (status, created_at) partial where status='pending'
+- up/down 마이그레이션 쌍
+- Drizzle 스키마 파일
+
+## 단계 2: @typescript-expert
+단계 1 완료 후:
+- NotificationService (create, markSent, listForUser)
+- 각 메서드에 Zod 입력 스키마
+- 실패 테스트를 먼저 작성 (5개 이상) → 구현 → 통과 확인
+
+제약:
+- any / @ts-ignore 금지
+- 트랜잭션 필요한 곳은 명시
+- 실행: `pnpm db:migrate && pnpm test notification`
+```
+
+**예상 산출물:** 마이그레이션 up/down + Drizzle 스키마 + 서비스 + 테스트 + 실행 결과.
+
+**주의사항:**
+- 0xfurai 의 언어/DB 전문가는 서로 다른 세션으로 분리해도 되지만, 같은 세션이면 단계 사이에 명시적 "다음 단계로 가자" 가 필요.
+- jsonb payload 에 대한 타입 안정성은 에이전트가 종종 잊음. Zod + Drizzle `$type` 명시 필수.
+
+---
+
+### 코드 리뷰 — 0xfurai
+
+**사용 에이전트:** `code-reviewer` (self-review 용이)
+
+**환경 설정:**
+```bash
+cp /tmp/0xfurai/agents/code-reviewer.md ~/.claude/agents/
+```
+
+**실전 프롬프트:**
+```
+@code-reviewer
+
+커밋 전 셀프 리뷰. 칭찬 금지.
+
+diff:
+```
+[git diff --staged 결과]
+```
+
+다음을 순서대로 점검:
+1. 정확성 — null / undefined / 경계값 / 에러 경로
+2. CLAUDE.md 금지 규칙 위반
+3. 타입 안정성 — any 없나, unknown 은 좁혀졌나
+4. 테스트 — 이 변경을 커버하는 테스트가 diff 안에 있나
+5. 로그/관측성 — 새 실패 경로가 보이는가
+6. 보안 — 사용자 입력 이스케이프, 권한 체크
+7. 가독성 — 2주 후 내가 읽을 수 있나
+
+각 항목: "OK" 또는 "문제: <한 줄>" + 수정 제안 1개
+마지막: 머지 가능 / 불가 + 고쳐야 할 목록
+```
+
+**예상 산출물:** 7개 항목 점검표 + 최종 판정 + 고칠 목록.
+
+**주의사항:**
+- 0xfurai `code-reviewer` 는 지시를 잘 따름. 단 "칭찬 금지" 를 빼면 "잘 작성하셨습니다" 같은 쓸모 없는 말이 추가됨.
+- 큰 diff 에서는 세션 컨텍스트 초과 가능. 파일 그룹별로 2~3 라운드 권장.
+
+---
+
+### 테스트 자동화 — 0xfurai
+
+**사용 에이전트:** `testing-jest` + `testing-playwright`
+
+**환경 설정:**
+```bash
+cp /tmp/0xfurai/agents/testing-jest.md ~/.claude/agents/
+cp /tmp/0xfurai/agents/testing-playwright.md ~/.claude/agents/
+```
+
+**실전 프롬프트:**
+```
+@testing-jest
+
+다음 파일에 단위 테스트를 추가한다.
+
+대상: src/services/notification-service.ts
+테스트 파일: src/services/__tests__/notification-service.test.ts
+스택: Vitest (Jest 호환 API) + in-memory fake repository
+
+제약:
+- AAA 구조
+- 시나리오 범주:
+  - 성공 경로 (채널별 3개)
+  - 실패 경로 (DB 에러, payload 검증 실패, 권한 없음)
+  - 동시성 (동일 user 에 중복 알림 — 멱등)
+- 모킹: 시간(vi.useFakeTimers), 외부 HTTP 만
+- 커버리지: branch 85% 이상
+
+실행:
+1. 테스트 작성
+2. `pnpm test notification-service` 실행
+3. 미커버 라인 있으면 1줄씩 이유
+
+이어서 @testing-playwright 로 E2E 스모크 1개를 내가 별도 세션에서 요청하겠다.
+```
+
+**예상 산출물:** Vitest 단위 테스트 15~20개 + 실행 리포트 + 커버리지.
+
+**주의사항:**
+- 0xfurai `testing-jest` 가 진짜 Jest 전제로 작성할 수 있음. Vitest 임을 명시해야 imports / matchers 가 맞음.
+- `testing-playwright` 는 별도 세션 권장 (환경/의존성이 다름).
+
+---
+
+### 멀티 에이전트 협업 — 0xfurai
+
+**사용 에이전트:** 여러 에이전트를 **사람이 직접 순차 호출**. 0xfurai 는 오케스트레이터 에이전트가 없음.
+
+**환경 설정:**
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+
+# 필요한 에이전트 일괄 복사
+for a in system-architect postgres-specialist typescript-expert react-developer \
+         testing-jest code-reviewer security-auditor; do
+  cp /tmp/0xfurai/agents/$a.md ~/.claude/agents/
+done
+```
+
+**실전 프롬프트 (수동 Pipeline 패턴):**
+```
+기능: [예: "알림 읽음 상태 저장 + 목록 조회 API + 프론트 배지"]
+
+다음 순서로 **한 번에 한 에이전트만** 호출한다. 단계 완료 시 내가 다음 에이전트를 부른다.
+
+Step 1: @system-architect
+- 영향 파일 목록 + 계획 `planning/notification-read.md` 생성
+- 코드 수정 금지
+
+Step 2: @postgres-specialist
+- planning/notification-read.md 읽기
+- notification.read_at 컬럼 추가 마이그레이션 (Expand)
+
+Step 3: @typescript-expert
+- markAsRead 서비스 + API 엔드포인트
+
+Step 4: @react-developer
+- 배지 컴포넌트 + 훅
+
+Step 5: @testing-jest
+- 단위 + 통합 테스트
+
+Step 6: @code-reviewer
+- 전체 diff 리뷰 + 머지 가부 판정
+
+⚠️ Step 을 건너뛰지 마라. 이전 단계의 planning 파일을 먼저 읽은 뒤 진행.
+```
+
+**예상 산출물:** 6단계 파이프라인 완료 + planning 파일 + 최종 리뷰 리포트.
+
+**주의사항:**
+- 0xfurai 는 **자체 오케스트레이터가 없음**. 사람이 단계를 밀어야 함.
+- "한 번에 한 에이전트만" 을 빼면 자동 위임이 섞여 혼선.
+- 각 단계를 **새 세션** 에서 여는 것이 가장 안전 (컨텍스트 분리).
+
+---
+
+## 4. davepoon/buildwithclaude
+
+통합 마켓플레이스 허브. 웹 UI(buildwithclaude.com)에서 검색 가능. agents + commands + hooks + skills 다 있음.
+
+### 프로젝트 설계 — davepoon
+
+**사용 에이전트:** `agents-system-design-architect` (+ 보조 `commands-documentation-adr`)
+
+**환경 설정:**
+```
+/plugin marketplace add davepoon/buildwithclaude
+/plugin install agents-system-design-architect@buildwithclaude
+/plugin install commands-documentation-adr@buildwithclaude
+```
+
+**실전 프롬프트:**
+```
+@agents-system-design-architect
+
+새 서비스 설계. 코드 수정 금지.
+
+목적: [예: "멀티테넌트 SaaS 대시보드 MVP"]
+테넌트 격리: [예: "schema-per-tenant"]
+스택: Next.js 15 + tRPC + Postgres 16 + Clerk auth
+초기 테넌트 수: 50
+테넌트당 유저: 평균 20
+
+산출물:
+1. 컨텍스트 다이어그램 + 배포 다이어그램 (Mermaid)
+2. 테넌트 격리 전략 상세 (DB/캐시/파일/백그라운드잡)
+3. 온보딩 플로우 시퀀스 (Mermaid sequenceDiagram)
+4. 요금제 기반 기능 플래그 설계
+5. 리스크 5개 + 완화책
+
+이어서:
+/adr-new "테넌트 격리 전략 schema-per-tenant 채택"
+/adr-new "인증 공급자 Clerk 채택 이유"
+```
+
+**예상 산출물:** 설계 문서 1건 + ADR 2개 (슬래시 커맨드가 템플릿 생성).
+
+**주의사항:**
+- buildwithclaude 의 플러그인은 **카테고리 접두어** (`agents-*`, `commands-*`, `hooks-*`) 가 있어 이름이 길다. 자동완성 활용.
+- 설계 단계에서 `hooks-*` 는 켜지 말 것 (파일 편집 트리거가 잘못 걸릴 수 있음).
+
+---
+
+### 코드 분석 — davepoon
+
+**사용 에이전트:** `agents-codebase-explorer` + `/codebase-map` 커맨드
+
+**환경 설정:**
+```
+/plugin install agents-codebase-explorer@buildwithclaude
+/plugin install commands-code-analysis@buildwithclaude
+```
+
+**실전 프롬프트:**
+```
+/codebase-map src/
+
+이어서:
+
+@agents-codebase-explorer
+
+위 맵을 기반으로 다음을 조사한다.
+
+1. 가장 자주 import 되는 모듈 Top 10 (변경 시 파급 큰 곳)
+2. 테스트 커버리지가 낮은 공개 모듈 Top 5
+3. 순환 의존 존재 여부
+4. 파일당 평균 줄수 / 500줄 초과 파일 목록
+5. 이 레포에 처음 합류한 개발자가 2시간 안에 이해해야 할 핵심 파일 10개
+
+출력은 Markdown 표 + 근거 경로 포함. 파일 수정 금지.
+```
+
+**예상 산출물:** 코드베이스 지도 + 5개 분석 섹션. 온보딩 문서로 재사용 가능.
+
+**주의사항:**
+- `/codebase-map` 커맨드는 첫 실행 시 프로젝트 전체를 스캔 → 큰 레포는 시간·토큰 소모 큼. 최초 1회만.
+- 결과를 `docs/onboarding.md` 로 저장하는 훅(`hooks-save-analysis`)이 있으면 자동 보존 가능.
+
+---
+
+### 기능 코딩 — davepoon
+
+**사용 에이전트:** `agents-fullstack-feature-developer`
+
+**환경 설정:**
+```
+/plugin install agents-fullstack-feature-developer@buildwithclaude
+/plugin install commands-git-workflow@buildwithclaude
+```
+
+**실전 프롬프트:**
+```
+@agents-fullstack-feature-developer
+
+기능: [예: "팀 초대 링크 발급 + 수락 플로우"]
+
+참조:
+- docs/PRD.md §4.1
+- docs/features/team-invite.md (AC 8개)
+- src/server/ (tRPC 라우터 위치)
+- src/app/(dashboard)/team/ (프론트)
+
+제약:
+- 트랜잭션: 초대 생성 + 이메일 발송을 outbox 패턴으로
+- 이메일: Resend API (src/lib/email.ts 기존)
+- 만료: 초대 링크 48시간
+- 멱등: 같은 이메일로 중복 초대 불가
+
+출력 순서:
+1. 영향 파일 목록 (신규/수정)
+2. tRPC procedure 시그니처 + DB 스키마 변경
+3. 내 승인 → 코드 작성
+4. 작성 후 `/commit-with-conventional-message feat` 로 커밋
+```
+
+**예상 산출물:** 풀스택 변경 + Conventional Commit 자동 생성.
+
+**주의사항:**
+- davepoon 의 `fullstack-feature-developer` 는 Next.js/tRPC 편향. 다른 스택(Remix/SolidStart)이면 스택을 명시적으로 적어야 함.
+- `commands-git-workflow` 는 커밋 메시지를 자동 생성하므로 팀 컨벤션과 맞는지 먼저 검증.
+
+---
+
+### 코드 리뷰 — davepoon
+
+**사용 에이전트:** `agents-code-reviewer-strict` + `/security-scan` 커맨드 + `hooks-block-todo-comments`
+
+**환경 설정:**
+```
+/plugin install agents-code-reviewer-strict@buildwithclaude
+/plugin install commands-security-scan@buildwithclaude
+/plugin install hooks-block-todo-comments@buildwithclaude
+```
+
+**실전 프롬프트:**
+```
+/security-scan --staged
+
+이어서:
+
+@agents-code-reviewer-strict
+
+위 security-scan 결과 + 스테이징된 diff 를 리뷰한다.
+
+점검:
+1. security-scan 경고 — 각각 true-positive 인가? 근거 1줄
+2. 로직 정확성 — 경계값/에러 경로
+3. 테스트 — 존재 여부와 충분성
+4. CLAUDE.md 규칙
+5. 성능 — 명백한 N+1, 거대 payload
+
+출력:
+- security-scan 경고: 각 라인 + 판정 (TP/FP)
+- diff 점검: OK/문제
+- 머지 가능/조건부/반려
+```
+
+**예상 산출물:** 보안 스캔 결과 + 리뷰 코멘트 + 판정. `hooks-block-todo-comments` 가 커밋 단계에서 TODO 자동 차단.
+
+**주의사항:**
+- 훅을 켠 뒤엔 의도한 TODO(예: `// TODO(#123)`)까지 차단될 수 있음. 훅 설정에 화이트리스트 정규식 필수.
+- `/security-scan` 은 내부적으로 여러 스캐너를 호출. 토큰 소모가 상대적으로 크다.
+
+---
+
+### 테스트 자동화 — davepoon
+
+**사용 에이전트:** `agents-test-writer-comprehensive` + `/test-gen` 커맨드
+
+**환경 설정:**
+```
+/plugin install agents-test-writer-comprehensive@buildwithclaude
+/plugin install commands-testing@buildwithclaude
+```
+
+**실전 프롬프트:**
+```
+/test-gen src/services/invite-service.ts
+
+이어서:
+
+@agents-test-writer-comprehensive
+
+위 자동 생성 테스트를 기반으로 다음을 수행:
+
+1. 누락 시나리오 추가 (경계값, 에러 경로, 동시성)
+2. 테스트 이름을 "should ..." 형식으로 정리
+3. 픽스처를 `tests/fixtures/invite.ts` 로 추출 (중복 제거)
+4. 통합 테스트 1개 추가 (tRPC caller 레벨)
+5. `pnpm test invite` 실행 + 결과 요약
+
+제약:
+- 목표 커버리지: 90% (statement)
+- 외부 HTTP 는 msw 로 모킹
+- 테스트당 실행 시간 200ms 이하
+```
+
+**예상 산출물:** 자동 생성 + 보강된 테스트 세트 + 픽스처 추출 + 실행 결과.
+
+**주의사항:**
+- `/test-gen` 은 "일단 돌아가는 수준" 의 뼈대만 생성. 보강 에이전트 호출은 필수.
+- 픽스처 위치를 명시하지 않으면 에이전트가 테스트 파일 내부에 중복 작성.
+
+---
+
+### 멀티 에이전트 협업 — davepoon
+
+**사용 에이전트:** `agents-orchestrator-router` + 역할별 에이전트 3~4명
+
+**환경 설정:**
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+```
+```
+/plugin install agents-orchestrator-router@buildwithclaude
+/plugin install agents-backend-engineer@buildwithclaude
+/plugin install agents-frontend-engineer@buildwithclaude
+/plugin install agents-test-writer-comprehensive@buildwithclaude
+/plugin install agents-code-reviewer-strict@buildwithclaude
+```
+
+**실전 프롬프트:**
+```
+@agents-orchestrator-router
+
+작업: [예: "결제 실패 시 자동 재시도 로직 추가"]
+
+팀:
+- @agents-backend-engineer — 재시도 큐 + 지수 백오프
+- @agents-frontend-engineer — 사용자 알림 UI
+- @agents-test-writer-comprehensive — 테스트 3레벨
+- @agents-code-reviewer-strict — 최종 리뷰
+
+규칙:
+1. 각 에이전트는 자기 영역만 수정
+2. orchestrator 가 단계별 충돌 검사
+3. 단계 종료 시 diff 보여주고 내 승인 대기
+4. 실패 경로(결제 게이트웨이 타임아웃)는 별도 테스트 필수
+5. 최종 PR 설명은 `/pr-description` 커맨드로 생성
+
+산출물:
+- planning/payment-retry.md
+- 각 에이전트 diff 취합본
+- 테스트 실행 결과
+- PR 설명 초안
+```
+
+**예상 산출물:** 4인 팀 병렬/순차 협업 완료 + PR 초안.
+
+**주의사항:**
+- buildwithclaude 의 orchestrator 는 비교적 최근 추가. 릴리즈에 따라 동작 차이가 있을 수 있음.
+- 4개 플러그인을 동시에 설치하면 이름 충돌 가능. `/plugin list` 로 활성 에이전트를 확인하고 시작.
+
+---
