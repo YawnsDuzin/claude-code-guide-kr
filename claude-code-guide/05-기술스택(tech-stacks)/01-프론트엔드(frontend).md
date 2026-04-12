@@ -9,38 +9,14 @@
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# React 프로젝트 컨벤션
-
-## 기술 스택
-- React 18 + TypeScript
-- 상태 관리: Zustand
-- 스타일링: Tailwind CSS
-- 테스트: Jest + React Testing Library
-- 빌드: Vite
-
-## 프로젝트 구조
-src/
-├── components/    # 재사용 컴포넌트 (PascalCase)
-├── pages/         # 페이지 컴포넌트
-├── hooks/         # 커스텀 훅 (use 접두사)
-├── stores/        # Zustand 스토어
-├── types/         # TypeScript 타입 정의
-├── utils/         # 유틸리티 함수
-└── api/           # API 호출 함수
-
-## 코딩 규칙
-- 함수형 컴포넌트만 사용 (클래스 컴포넌트 금지)
+**React CLAUDE.md 핵심 포인트:**
+- 함수형 컴포넌트만, 클래스 컴포넌트 금지
+- 파일명: PascalCase (컴포넌트), camelCase (유틸/훅)
+- Tailwind CSS 사용, 인라인 style 금지
 - Props는 interface로 정의, ComponentNameProps 네이밍
-- 커스텀 훅은 반드시 hooks/ 디렉토리에 배치
-- CSS 클래스는 Tailwind 유틸리티 클래스 사용
+- API 호출은 api/ 디렉토리 통해서만
 
-## 명령어
-- 개발: npm run dev
-- 빌드: npm run build
-- 테스트: npm run test
-- 린트: npm run lint
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 컴포넌트 생성 예제
 
@@ -153,28 +129,14 @@ describe('UserProfileCard', () => {
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Vue 프로젝트 컨벤션
-
-## 기술 스택
-- Vue 3 + TypeScript + Composition API
-- 상태 관리: Pinia
-- 라우팅: Vue Router
-- 테스트: Vitest + Vue Test Utils
-- 스타일링: SCSS Modules
-
-## 코딩 규칙
-- <script setup lang="ts"> 사용
-- 컴포넌트: PascalCase 파일명
-- Composable: use 접두사 (useAuth, useForm 등)
+**Vue 3 CLAUDE.md 핵심 포인트:**
+- Composition API + `<script setup lang="ts">` 사용
+- 컴포넌트: PascalCase, Composable: use 접두사
+- Pinia 상태 관리, Vue Router 라우팅
 - defineProps/defineEmits로 타입 안전한 props/events
+- 테스트: Vitest + Vue Test Utils
 
-## 명령어
-- 개발: npm run dev
-- 빌드: npm run build
-- 테스트: npx vitest
-- 린트: npm run lint
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 컴포넌트 생성 예제
 
@@ -270,27 +232,14 @@ describe('SearchDropdown', () => {
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Angular 프로젝트 컨벤션
-
-## 기술 스택
-- Angular 17+ (Standalone Components)
-- 상태 관리: NgRx Signals
-- 테스트: Jasmine + Karma
-- 스타일링: Angular Material + SCSS
-
-## 코딩 규칙
-- Standalone 컴포넌트 사용 (NgModule 최소화)
-- Signal 기반 반응성 패턴 사용
+**Angular CLAUDE.md 핵심 포인트:**
+- Standalone 컴포넌트 사용, NgModule 최소화
+- Signal 기반 반응성 패턴 + OnPush 변경 감지
 - inject() 함수로 DI (constructor 주입 지양)
-- OnPush 변경 감지 전략 기본 사용
+- Angular Material + SCSS 스타일링
+- NgRx Signals 상태 관리
 
-## 명령어
-- 개발: ng serve
-- 빌드: ng build --configuration production
-- 테스트: ng test
-- E2E: ng e2e
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 컴포넌트 생성 예제
 
@@ -318,35 +267,14 @@ Angular Standalone 컴포넌트로 데이터 테이블을 만들어줘.
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Next.js 프로젝트 컨벤션
+**Next.js CLAUDE.md 핵심 포인트:**
+- App Router 사용, 서버 컴포넌트 기본
+- 클라이언트 컴포넌트는 'use client' 명시 필수
+- 데이터 페칭: 서버 컴포넌트에서 직접, API는 Route Handlers
+- Prisma ORM + NextAuth.js 인증
+- Tailwind CSS 스타일링
 
-## 기술 스택
-- Next.js 14+ (App Router)
-- TypeScript
-- Prisma ORM + PostgreSQL
-- NextAuth.js 인증
-- Tailwind CSS
-
-## 프로젝트 구조
-app/
-├── (auth)/        # 인증 관련 라우트 그룹
-├── (dashboard)/   # 대시보드 라우트 그룹
-├── api/           # API Route Handlers
-└── layout.tsx     # 루트 레이아웃
-
-## 코딩 규칙
-- 서버 컴포넌트 기본, 클라이언트는 'use client' 명시
-- 데이터 페칭: 서버 컴포넌트에서 직접 fetch
-- API Routes: app/api/ 디렉토리의 Route Handlers 사용
-- 메타데이터: generateMetadata 함수 활용
-
-## 명령어
-- 개발: npm run dev
-- 빌드: npm run build
-- DB: npx prisma migrate dev
-- 시드: npx prisma db seed
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 페이지 및 API 라우트 생성
 

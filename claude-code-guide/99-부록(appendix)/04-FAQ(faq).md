@@ -141,43 +141,7 @@ nvm use 20
 
 ## 트러블슈팅
 
-### Q: `claude` 명령어를 찾을 수 없다고 나와요
-
-**A:**
-```bash
-# npm 전역 bin 경로 확인
-npm config get prefix
-# 해당 경로/bin이 PATH에 있는지 확인
-
-# PATH에 추가
-echo 'export PATH=$(npm config get prefix)/bin:$PATH' >> ~/.bashrc
-source ~/.bashrc
-```
-
-### Q: 인증 오류가 발생해요
-
-**A:**
-```bash
-# OAuth 재로그인
-claude auth login
-
-# API 키 확인
-echo $ANTHROPIC_API_KEY
-
-# API 키 재설정
-export ANTHROPIC_API_KEY=sk-ant-새로운키
-```
-
-### Q: MCP 서버 연결이 안 돼요
-
-**A:**
-```bash
-# MCP 서버 상태 확인
-claude mcp list
-
-# 진단 실행
-claude doctor
-```
+설치, 인증, 연결 관련 문제는 [문제 해결 가이드](./02-문제해결(troubleshooting).md)를 참조하세요.
 
 ---
 

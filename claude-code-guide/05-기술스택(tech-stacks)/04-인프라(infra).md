@@ -9,21 +9,14 @@
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Docker 프로젝트
-
-## 환경
-- Docker 24+ / Docker Compose v2
-- 베이스 이미지: node:20-alpine (Node), python:3.12-slim (Python)
-- 프라이빗 레지스트리: ghcr.io/myorg
-
-## 규칙
+**Docker CLAUDE.md 핵심 포인트:**
 - 멀티스테이지 빌드 필수
 - non-root 유저로 실행
-- .dockerignore 유지
-- 이미지 크기 최소화 (alpine/slim 베이스)
-- HEALTHCHECK 포함
-```
+- alpine/slim 베이스로 이미지 크기 최소화
+- .dockerignore 유지, HEALTHCHECK 포함
+- Docker Compose v2 사용
+
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### Dockerfile 생성
 
@@ -128,22 +121,14 @@ volumes:
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Kubernetes 프로젝트
-
-## 환경
-- K8s 1.29+
-- Helm 3
-- 네임스페이스: dev, staging, prod
-- Ingress: nginx-ingress
-- 시크릿 관리: Sealed Secrets
-
-## 규칙
+**Kubernetes CLAUDE.md 핵심 포인트:**
 - 리소스 limits/requests 필수 설정
 - 라이브니스/레디니스 프로브 필수
 - PDB (PodDisruptionBudget) 설정
-- 환경별 values 파일 분리
-```
+- 환경별 values 파일 분리 (Helm 3)
+- Sealed Secrets로 시크릿 관리
+
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### K8s 매니페스트 생성
 
@@ -252,40 +237,14 @@ kubectl logs, describe, exec 명령어 포함해서.
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Terraform 프로젝트
-
-## 환경
-- Terraform 1.7+
-- Provider: AWS (ap-northeast-2)
-- Backend: S3 + DynamoDB (상태 관리)
-- 모듈 구조 사용
-
-## 프로젝트 구조
-terraform/
-├── modules/
-│   ├── vpc/
-│   ├── ecs/
-│   ├── rds/
-│   └── cdn/
-├── environments/
-│   ├── dev/
-│   ├── staging/
-│   └── prod/
-└── shared/          # 공통 데이터 소스
-
-## 규칙
+**Terraform CLAUDE.md 핵심 포인트:**
 - 모듈화 필수 (재사용 가능한 단위)
 - 변수에 description, type, validation 포함
 - output으로 다른 모듈에 값 전달
 - terraform fmt, validate 통과 필수
+- S3 + DynamoDB 백엔드 상태 관리
 
-## 명령어
-- 초기화: terraform init
-- 계획: terraform plan -var-file=dev.tfvars
-- 적용: terraform apply -var-file=dev.tfvars
-- 검증: terraform validate
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 리소스 정의 예제
 

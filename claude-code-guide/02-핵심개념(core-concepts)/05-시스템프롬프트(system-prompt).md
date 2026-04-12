@@ -116,20 +116,9 @@ claude -p "Refactor this code" \
 
 ### 방법 3: CLAUDE.md (간접 커스터마이징)
 
-시스템 프롬프트는 아니지만, 컨텍스트에 포함되어 **프로젝트별 규칙**을 설정합니다.
+프로젝트 루트에 CLAUDE.md를 작성하면, 시스템 프롬프트의 일부로 자동 로드됩니다. 코딩 규칙, 프로젝트 구조 등을 지속적으로 적용할 수 있는 가장 실용적인 방법입니다.
 
-```markdown
-# CLAUDE.md 예시
-## 코딩 규칙
-- TypeScript strict 모드 사용
-- 함수형 컴포넌트만 사용 (class 컴포넌트 금지)
-- 커밋 메시지는 Conventional Commits 형식
-
-## 프로젝트 구조
-- src/components/ - React 컴포넌트
-- src/hooks/ - 커스텀 훅
-- src/api/ - API 호출 함수
-```
+> 상세 작성법은 [메모리(CLAUDE.md)](../03-주요기능(features)/01-메모리(memory).md)를 참조하세요.
 
 ---
 

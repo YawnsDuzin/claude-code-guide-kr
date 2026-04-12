@@ -9,39 +9,14 @@
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Node.js Express API 프로젝트
-
-## 기술 스택
-- Node.js 20 + TypeScript
-- Express 4
-- Prisma ORM + PostgreSQL
-- 인증: JWT + Passport
-- 검증: Zod
-- 테스트: Jest + Supertest
-
-## 프로젝트 구조
-src/
-├── routes/         # 라우트 정의
-├── controllers/    # 요청 처리 로직
-├── services/       # 비즈니스 로직
-├── models/         # Prisma 스키마 기반 타입
-├── middleware/      # 인증, 에러 핸들링 등
-├── utils/          # 유틸리티 함수
-└── config/         # 환경 설정
-
-## 코딩 규칙
+**Node.js/Express CLAUDE.md 핵심 포인트:**
 - Controller → Service → Repository 계층 분리
-- 에러는 커스텀 AppError 클래스 사용
 - 모든 입력은 Zod 스키마로 검증
+- 에러는 커스텀 AppError 클래스 사용
 - async/await 사용, 콜백 금지
+- Prisma ORM + JWT/Passport 인증
 
-## 명령어
-- 개발: npm run dev
-- 빌드: npm run build
-- 테스트: npm test
-- 마이그레이션: npx prisma migrate dev
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### API 엔드포인트 생성 예제
 
@@ -152,38 +127,14 @@ describe('POST /api/users', () => {
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# FastAPI 프로젝트
-
-## 기술 스택
-- Python 3.12 + FastAPI
-- SQLAlchemy 2.0 + Alembic (마이그레이션)
-- PostgreSQL
-- Pydantic v2 (검증/직렬화)
-- pytest + httpx (테스트)
-- Poetry (패키지 관리)
-
-## 프로젝트 구조
-app/
-├── api/routes/      # 라우트 엔드포인트
-├── core/            # 설정, 보안, 의존성
-├── models/          # SQLAlchemy 모델
-├── schemas/         # Pydantic 스키마
-├── services/        # 비즈니스 로직
-└── db/              # DB 연결, 마이그레이션
-
-## 코딩 규칙
-- 타입 힌트 필수
-- async def 엔드포인트 기본 사용
+**Python/FastAPI CLAUDE.md 핵심 포인트:**
+- 타입 힌트 필수, async def 엔드포인트 기본
+- Pydantic v2로 요청/응답 스키마 정의
 - Depends()로 의존성 주입
-- Pydantic 모델로 요청/응답 스키마 정의
+- SQLAlchemy 2.0 + Alembic 마이그레이션
+- api/routes → services → models 계층 분리
 
-## 명령어
-- 개발: uvicorn app.main:app --reload
-- 테스트: pytest -v
-- 마이그레이션 생성: alembic revision --autogenerate -m "설명"
-- 마이그레이션 적용: alembic upgrade head
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 엔드포인트 생성 예제
 
@@ -288,39 +239,14 @@ async def test_list_products_pagination():
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Go API 프로젝트
-
-## 기술 스택
-- Go 1.22+
-- 라우터: chi (또는 gin)
-- DB: sqlx + PostgreSQL
-- 마이그레이션: golang-migrate
-- 테스트: 표준 testing 패키지 + testify
-
-## 프로젝트 구조
-├── cmd/server/      # 메인 엔트리포인트
-├── internal/
-│   ├── handler/     # HTTP 핸들러
-│   ├── service/     # 비즈니스 로직
-│   ├── repository/  # DB 접근 계층
-│   ├── model/       # 도메인 모델
-│   └── middleware/   # HTTP 미들웨어
-├── pkg/             # 외부 공개 패키지
-└── migrations/      # SQL 마이그레이션
-
-## 코딩 규칙
-- 표준 프로젝트 레이아웃 준수
-- 에러는 반드시 처리 (_ 할당 금지)
+**Go CLAUDE.md 핵심 포인트:**
+- 표준 프로젝트 레이아웃 준수 (cmd/internal/pkg)
+- 에러는 반드시 처리, `_` 할당 금지
 - context.Context 첫 번째 파라미터로 전달
 - 인터페이스는 소비자 측에서 정의
+- handler → service → repository 계층 분리
 
-## 명령어
-- 실행: go run ./cmd/server
-- 테스트: go test ./...
-- 빌드: go build -o bin/server ./cmd/server
-- 린트: golangci-lint run
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 핸들러 생성 예제
 
@@ -384,36 +310,14 @@ func (h *OrderHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# .NET Web API 프로젝트
-
-## 기술 스택
-- .NET 8 + C# 12
-- ASP.NET Core Web API
-- Entity Framework Core + PostgreSQL
-- FluentValidation
-- xUnit + Moq (테스트)
-- MediatR (CQRS 패턴)
-
-## 프로젝트 구조
-src/
-├── Api/              # Controllers, Middleware
-├── Application/      # Commands, Queries, DTOs
-├── Domain/           # Entities, Value Objects
-└── Infrastructure/   # DB Context, Repositories
-
-## 코딩 규칙
-- Clean Architecture 준수
-- Minimal API 또는 Controller 사용
+**.NET CLAUDE.md 핵심 포인트:**
+- Clean Architecture 준수 (Api/Application/Domain/Infrastructure)
+- Minimal API 또는 Controller 패턴
 - record 타입으로 DTO 정의
+- MediatR CQRS 패턴 + FluentValidation
 - async/await 패턴 일관 사용
 
-## 명령어
-- 실행: dotnet run --project src/Api
-- 테스트: dotnet test
-- 마이그레이션: dotnet ef migrations add "설명"
-- DB 업데이트: dotnet ef database update
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### Controller 생성 예제
 

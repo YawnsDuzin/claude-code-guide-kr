@@ -9,41 +9,14 @@
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# React Native 프로젝트
-
-## 기술 스택
-- React Native 0.74+ (New Architecture)
-- TypeScript
-- 내비게이션: React Navigation 6
-- 상태 관리: Zustand + React Query
-- 스타일링: StyleSheet (NativeWind 옵션)
-- 테스트: Jest + React Native Testing Library
-
-## 프로젝트 구조
-src/
-├── screens/         # 화면 컴포넌트
-├── components/      # 재사용 UI 컴포넌트
-├── navigation/      # 네비게이션 설정
-├── hooks/           # 커스텀 훅
-├── services/        # API 통신 계층
-├── stores/          # 상태 관리
-├── utils/           # 유틸리티
-└── types/           # TypeScript 타입
-
-## 코딩 규칙
+**React Native CLAUDE.md 핵심 포인트:**
 - 함수형 컴포넌트 + 커스텀 훅 패턴
 - Platform.select()으로 플랫폼별 스타일 분기
 - 네이티브 모듈 접근은 services/ 계층을 통해
+- Zustand + React Query 상태 관리
 - 화면 컴포넌트는 비즈니스 로직 최소화
 
-## 명령어
-- iOS: npx react-native run-ios
-- Android: npx react-native run-android
-- 테스트: npm test
-- 린트: npm run lint
-- 타입 체크: npx tsc --noEmit
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 화면 및 컴포넌트 생성
 
@@ -158,44 +131,14 @@ EAS Build를 사용한 CI/CD 파이프라인을 설정해줘.
 
 ### CLAUDE.md 설정 예시
 
-```markdown
-# Flutter 프로젝트
-
-## 기술 스택
-- Flutter 3.22+ / Dart 3.4+
-- 상태 관리: Riverpod 2
-- 라우팅: go_router
-- HTTP: dio
-- 로컬 저장: Hive / SharedPreferences
-- 테스트: flutter_test + mockito
-
-## 프로젝트 구조
-lib/
-├── features/        # 기능별 모듈
-│   ├── auth/
-│   ├── home/
-│   └── product/
-├── core/            # 공통 코드
-│   ├── theme/
-│   ├── router/
-│   └── network/
-├── models/          # 데이터 모델 (freezed)
-└── main.dart
-
-## 코딩 규칙
-- Feature-first 구조
+**Flutter CLAUDE.md 핵심 포인트:**
+- Feature-first 구조 (features/core/models)
 - Riverpod provider로 상태 관리
 - freezed + json_serializable로 모델 생성
 - Widget은 작게 분리, 재사용성 극대화
+- go_router 라우팅, dio HTTP 클라이언트
 
-## 명령어
-- 실행: flutter run
-- 테스트: flutter test
-- 빌드 (Android): flutter build apk
-- 빌드 (iOS): flutter build ipa
-- 코드 생성: dart run build_runner build
-- 분석: flutter analyze
-```
+> 전체 템플릿은 [CLAUDE.md 작성법 &sect;7 실전 템플릿](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md#7-실전-복사용-템플릿-모음)을 참조하세요.
 
 ### 위젯 생성 예제
 
