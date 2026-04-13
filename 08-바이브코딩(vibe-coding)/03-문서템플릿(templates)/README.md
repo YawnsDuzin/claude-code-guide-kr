@@ -6,8 +6,8 @@
 ## 먼저 읽기
 
 > "어떤 문서를 만들고 어떤 걸 만들지 않을 것인가" 의 결정은 템플릿을 복사하기 **전에** 합니다.
-> → [07-최적화/06-문서종류분류](../../07-최적화(optimization)/06-문서종류분류(document-types).md) — 필수 4종 / 권장 3종 / 불필요 5종
-> → [07-최적화/07-에이전트친화포맷](../../07-최적화(optimization)/07-에이전트친화포맷(agent-friendly-formats).md) — 어떤 포맷으로 적을지
+> → [07-최적화/04-문서종류분류](../../07-최적화(optimization)/04-문서종류분류(document-types).md) — 필수 4종 / 권장 3종 / 불필요 5종
+> → [07-최적화/05-에이전트친화포맷](../../07-최적화(optimization)/05-에이전트친화포맷(agent-friendly-formats).md) — 어떤 포맷으로 적을지
 
 ## 파일 목록
 
@@ -23,7 +23,7 @@
 
 ```bash
 # 이 가이드 레포 기준 경로
-TPL=claude-code-guide/08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)
+TPL=08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)
 
 # CLAUDE.md
 cp "$TPL/CLAUDE.template.md" ./CLAUDE.md

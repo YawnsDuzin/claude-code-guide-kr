@@ -8,18 +8,19 @@ A comprehensive Korean-language guide to Claude Code — covering installation, 
 
 ## Repository Structure
 
-All content lives under `claude-code-guide/` organized into numbered sections:
+All content is organized into numbered sections at the project root:
 
-- **00**: Overview and quick start
 - **01-07**: Reference material (installation, core concepts, features, workflows, tech stacks, tool comparisons, optimization)
 - **08-바이브코딩(vibe-coding)**: Practical execution kit — copy-paste prompt templates, document templates (CLAUDE.md, PRD, architecture, ERD, feature-spec), multi-agent collaboration patterns, and end-to-end examples
 - **99-부록(appendix)**: CLI reference, troubleshooting, glossary, FAQ, tips
 
-### Merged/Deleted Files (2026-04-12)
+### Merged/Deleted Files
 
 The following files were merged and no longer exist as separate files:
-- `07-최적화/05-CLAUDE-MD템플릿` → merged into `07-최적화/02-CLAUDE-MD작성법(claude-md).md` §7
-- `07-최적화/04-비용관리` → merged into `07-최적화/03-성능최적화(performance).md` Part 2
+- `07-최적화/05-CLAUDE-MD템플릿` → merged into `07-최적화/02-CLAUDE-MD작성법(claude-md).md` §7 (2026-04-12)
+- `07-최적화/04-비용관리` → merged into `07-최적화/03-성능최적화(performance).md` Part 2 (2026-04-12)
+- `07-최적화/06,07` → renumbered to `04,05` (2026-04-13)
+- `08-바이브코딩/00-개요(overview).md` → merged into `08-바이브코딩/README.md` (2026-04-13)
 
 ## Writing Conventions
 
@@ -53,6 +54,7 @@ To prevent duplication, each major topic has a designated "primary document." Ot
 | CLAUDE.md 개념/기능 | `03-주요기능/01-메모리(memory).md` |
 | CLAUDE.md 작성법/템플릿 | `07-최적화/02-CLAUDE-MD작성법(claude-md).md` |
 | 성능 + 비용 최적화 | `07-최적화/03-성능최적화(performance).md` |
+| 컨텍스트 윈도우 관리 | `02-핵심개념/04-컨텍스트관리(context-management).md` |
 | 슬래시 명령어 | `03-주요기능/02-스킬(skills).md` |
 | 트러블슈팅 | `99-부록/02-문제해결(troubleshooting).md` |
 | 도구 비교/선택 | `06-비교/04-선택가이드(selection-guide).md` |

@@ -326,6 +326,6 @@ flowchart TD
 
 ## 관련 문서
 
-- [06-문서종류분류](./06-문서종류분류(document-types).md) — 어떤 문서를 만들고 어떤 걸 만들지 않을지
+- [04-문서종류분류](./04-문서종류분류(document-types).md) — 어떤 문서를 만들고 어떤 걸 만들지 않을지
 - [02-CLAUDE-MD작성법](./02-CLAUDE-MD작성법(claude-md).md) — CLAUDE.md 작성 가이드 + 프로젝트별 템플릿
 - [08-바이브코딩/03-문서템플릿](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/) — 복사용 문서 템플릿

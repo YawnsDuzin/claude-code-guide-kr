@@ -439,4 +439,4 @@ Claude가 자동으로 적절한 CLAUDE.md 파일에 추가합니다.
 ## 관련 문서
 
 - **복사용 CLAUDE.md 템플릿 (명령형, 11섹션)**: [08-바이브코딩/03-문서템플릿/CLAUDE.template.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/CLAUDE.template.md)
-- **어떤 문서를 만들지**: [06-문서종류분류](./06-문서종류분류(document-types).md) — 필수 4종 / 권장 3종 / 불필요 5종
+- **어떤 문서를 만들지**: [04-문서종류분류](./04-문서종류분류(document-types).md) — 필수 4종 / 권장 3종 / 불필요 5종

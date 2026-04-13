@@ -169,4 +169,4 @@ P0 작업 시작 전:
 ## 관련 문서
 
 - [08-바이브코딩/03-문서템플릿/README.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/README.md) — 각 템플릿 파일의 복사 방법
-- [07-에이전트친화포맷](./07-에이전트친화포맷(agent-friendly-formats).md) — 어떤 포맷으로 적을지
+- [05-에이전트친화포맷](./05-에이전트친화포맷(agent-friendly-formats).md) — 어떤 포맷으로 적을지

@@ -14,7 +14,7 @@
 프로젝트 루트에 `CLAUDE.md`를 만듭니다. Claude Code는 세션 시작 시 이 파일을 자동으로 읽습니다.
 
 ```bash
-cp claude-code-guide/08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)/CLAUDE.template.md ./CLAUDE.md
+cp 08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)/CLAUDE.template.md ./CLAUDE.md
 ```
 
 그리고 다음 5개 섹션만 먼저 채웁니다 (나머지는 나중에):
@@ -34,7 +34,7 @@ cp claude-code-guide/08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templ
 "무엇을 왜 만드는가"를 한 파일에 둡니다.
 
 ```bash
-cp claude-code-guide/08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)/PRD.template.md ./docs/PRD.md
+cp 08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)/PRD.template.md ./docs/PRD.md
 ```
 
 최소 채워야 할 것:
@@ -51,7 +51,7 @@ cp claude-code-guide/08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templ
 ## 단계 3: `architecture.md` 작성 (5분, Mermaid 한 장)
 
 ```bash
-cp claude-code-guide/08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)/architecture.template.md ./docs/architecture.md
+cp 08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)/architecture.template.md ./docs/architecture.md
 ```
 
 핵심은 **Mermaid 다이어그램 1개**입니다. 글은 나중에 채워도 됩니다.
@@ -72,7 +72,7 @@ flowchart LR
 ## 단계 4: `erd.md` 작성 (5분, Mermaid ER 다이어그램)
 
 ```bash
-cp claude-code-guide/08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)/erd.template.md ./docs/erd.md
+cp 08-바이브코딩\(vibe-coding\)/03-문서템플릿\(templates\)/erd.template.md ./docs/erd.md
 ```
 
 ```mermaid
