@@ -14,7 +14,7 @@ GitHub Copilot은 GitHub과 OpenAI가 협력하여 만든 AI 코딩 어시스턴
 
 ### Claude Code
 
-Claude Code는 Anthropic이 개발한 터미널 기반 에이전틱 코딩 도구입니다. 상세 소개는 [00-개요](../00-개요(overview).md)를 참조하세요.
+Claude Code는 Anthropic이 개발한 터미널 기반 에이전틱 코딩 도구입니다. 상세 소개는 [README](../README.md)를 참조하세요.
 
 ---
 

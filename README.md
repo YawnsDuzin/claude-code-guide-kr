@@ -1,101 +1,66 @@
 # Claude Code 완벽 가이드 (한국어)
 
-Claude Code의 설치/개념/기능/워크플로우/최적화 + **실전 바이브 코딩 플레이북**까지, 한국어로 작성된 포괄적인 가이드입니다.
+Claude Code는 **Anthropic이 공식 개발한 에이전틱(agentic) 코딩 CLI 도구**입니다. 터미널에서 직접 실행되며, 코드베이스를 이해하고, 파일을 편집하고, 명령어를 실행하며, 복잡한 프로그래밍 작업을 자율적으로 수행합니다.
 
-> 모든 문서는 [`claude-code-guide/`](./claude-code-guide/) 디렉토리에 있습니다.
+이 가이드는 설치/개념/기능/워크플로우/최적화 + **실전 바이브 코딩 플레이북**까지, 한국어로 작성된 포괄적인 가이드입니다.
 
-이 가이드는 두 가지 사용 방식을 모두 지원합니다.
+```bash
+# 터미널에서 바로 대화하듯 코딩할 수 있습니다
+$ claude
+> 이 프로젝트의 구조를 설명해줘
 
-| 사용 방식 | 보는 곳 |
-|---------|--------|
-| "이 기능이 뭔지" 알고 싶다 | 01~07 (레퍼런스) |
-| "내일 출근해서 뭐부터 할지" 알고 싶다 | **08-바이브코딩** (플레이북, 복붙용 자산) |
-
----
-
-## 목차
-
-### [00. 개요 및 빠른 시작](./claude-code-guide/00-개요(overview).md)
-Claude Code 소개, 주요 기능 요약, 3단계 빠른 시작 가이드
-
-### 01. 설치
-- [시스템 요구사항](./claude-code-guide/01-설치(installation)/01-시스템요구사항(requirements).md) - OS, Node.js, 하드웨어, 네트워크, 인증
-- [OS별 설치 가이드](./claude-code-guide/01-설치(installation)/02-설치가이드(install-guide).md) - macOS, Linux, Windows 설치 방법
-- [첫 실행 및 초기 설정](./claude-code-guide/01-설치(installation)/03-첫실행(first-run).md) - 인증, 기본 설정, 첫 대화
-
-### 02. 핵심 개념
-- [대화와 세션](./claude-code-guide/02-핵심개념(core-concepts)/01-대화와세션(conversation).md) - 대화 흐름, 세션 관리, 컨텍스트
-- [도구 시스템](./claude-code-guide/02-핵심개념(core-concepts)/02-도구시스템(tools).md) - 파일 편집, Bash 실행, 검색 도구
-- [권한 시스템](./claude-code-guide/02-핵심개념(core-concepts)/03-권한시스템(permissions).md) - 권한 모드, 허용 목록, 보안 설정
-- [컨텍스트 관리](./claude-code-guide/02-핵심개념(core-concepts)/04-컨텍스트관리(context-management).md) - 토큰 관리, 컴팩션, 최적화
-- [시스템 프롬프트](./claude-code-guide/02-핵심개념(core-concepts)/05-시스템프롬프트(system-prompt).md) - 시스템 프롬프트 구조, 커스터마이징
-
-### 03. 주요 기능
-- [메모리 (CLAUDE.md)](./claude-code-guide/03-주요기능(features)/01-메모리(memory).md) - 프로젝트 설정, 계층 구조, 작성법
-- [스킬 (Skills)](./claude-code-guide/03-주요기능(features)/02-스킬(skills).md) - 슬래시 명령어, 커스텀 스킬
-- [훅 (Hooks)](./claude-code-guide/03-주요기능(features)/03-훅(hooks).md) - 이벤트 기반 자동화, 커스텀 훅
-- [MCP 서버](./claude-code-guide/03-주요기능(features)/04-MCP서버(mcp-servers).md) - 외부 도구 연동, MCP 설정
-- [서브에이전트](./claude-code-guide/03-주요기능(features)/05-서브에이전트(subagents).md) - 병렬 처리, 멀티 에이전트
-- [IDE 통합](./claude-code-guide/03-주요기능(features)/06-IDE통합(ide-integration).md) - VS Code, JetBrains 연동
-- [Web & Desktop](./claude-code-guide/03-주요기능(features)/07-웹데스크톱(web-desktop).md) - Web, Desktop 앱, VS Code 확장 사용법
-
-### 04. 워크플로우
-**개념 (Claude Code의 워크플로우 기초)**
-- [코드 분석](./claude-code-guide/04-워크플로우(workflows)/01-코드분석(analysis).md) - 코드베이스 이해, 구조 분석
-- [코딩](./claude-code-guide/04-워크플로우(workflows)/02-코딩(coding).md) - 기능 개발, 코드 생성
-- [디버깅](./claude-code-guide/04-워크플로우(workflows)/03-디버깅(debugging).md) - 버그 추적, 오류 해결
-- [리팩토링](./claude-code-guide/04-워크플로우(workflows)/04-리팩토링(refactoring).md) - 코드 개선, 구조 변경
-- [Git 워크플로우](./claude-code-guide/04-워크플로우(workflows)/05-Git워크플로우(git-workflow).md) - 커밋, PR, 코드 리뷰
-- [Git 기본사용법](./claude-code-guide/04-워크플로우(workflows)/06-Git기본사용법(git-basics).md) - Git 기초, 명령어, 상황별 Git Flow
-
-**실전 플레이북 (단계 체크리스트 + Mermaid 흐름도)**
-- [기능 개발 흐름](./claude-code-guide/04-워크플로우(workflows)/07-기능개발흐름(feature-flow).md) - 8단계, 작업 크기별 분할
-- [버그 수정 흐름](./claude-code-guide/04-워크플로우(workflows)/08-버그수정흐름(bugfix-flow).md) - 재현→원인→최소 패치→회귀 테스트
-- [리팩토링 흐름](./claude-code-guide/04-워크플로우(workflows)/09-리팩토링흐름(refactoring-flow).md) - 보존 규칙 + 단계 분할
-- [스키마 변경 흐름](./claude-code-guide/04-워크플로우(workflows)/10-스키마변경흐름(schema-flow).md) - Expand-Contract 3단계
-- [UI 구현 흐름](./claude-code-guide/04-워크플로우(workflows)/11-UI구현흐름(ui-flow).md) - 텍스트 와이어프레임 우선
-
-### 05. 기술 스택별 활용
-- [프론트엔드](./claude-code-guide/05-기술스택(tech-stacks)/01-프론트엔드(frontend).md) - React, Vue, Angular, Next.js
-- [백엔드](./claude-code-guide/05-기술스택(tech-stacks)/02-백엔드(backend).md) - Node.js, Python, Java, Go
-- [모바일](./claude-code-guide/05-기술스택(tech-stacks)/03-모바일(mobile).md) - React Native, Flutter, Swift, Kotlin
-- [인프라](./claude-code-guide/05-기술스택(tech-stacks)/04-인프라(infra).md) - Docker, Kubernetes, Terraform, CI/CD
-
-### 06. AI 코딩 도구 비교
-- [vs GitHub Copilot](./claude-code-guide/06-비교(comparison)/01-GitHub-Copilot비교(vs-github-copilot).md)
-- [vs Cursor](./claude-code-guide/06-비교(comparison)/02-Cursor비교(vs-cursor).md)
-- [vs Windsurf](./claude-code-guide/06-비교(comparison)/03-Windsurf비교(vs-windsurf).md)
-- [도구 선택 가이드](./claude-code-guide/06-비교(comparison)/04-선택가이드(selection-guide).md)
-
-### 07. 최적화
-- [프롬프트 엔지니어링](./claude-code-guide/07-최적화(optimization)/01-프롬프트엔지니어링(prompt-engineering).md) - 효과적인 지시 방법
-- [CLAUDE.md 작성법 및 템플릿](./claude-code-guide/07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md) - 작성 원칙 + 프로젝트별 실전 템플릿
-- [성능 및 비용 최적화](./claude-code-guide/07-최적화(optimization)/03-성능최적화(performance).md) - 속도·정확도 개선 + 토큰 절약·비용 관리
-- [문서 종류 분류](./claude-code-guide/07-최적화(optimization)/06-문서종류분류(document-types).md) - 필수 4종 / 권장 3종 / 불필요 5종
-- [에이전트 친화 포맷](./claude-code-guide/07-최적화(optimization)/07-에이전트친화포맷(agent-friendly-formats).md) - Markdown + Mermaid 원칙 + 문서 종류별 포맷 매칭표
-
-### [08. 바이브 코딩 (Vibe Coding) — 실전 자산](./claude-code-guide/08-바이브코딩(vibe-coding)/README.md)
-"문서/프롬프트/템플릿을 복붙해서 바로 쓰는" 실행 키트입니다. 01~07이 이론/레퍼런스라면, 08은 손에 쥐는 자산입니다.
-
-- [00. 개요](./claude-code-guide/08-바이브코딩(vibe-coding)/00-개요(overview).md) - 바이브 코딩 등식 + 8단계 공통 루프
-- [01. 빠른 시작](./claude-code-guide/08-바이브코딩(vibe-coding)/01-빠른시작(quickstart).md) - 5단계 초기화 (CLAUDE.md → PRD → arch → ERD → dev)
-- [02. 프롬프트 템플릿](./claude-code-guide/08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/) - 범용 + 7가지 작업 유형별 재사용 템플릿
-- [03. 문서 템플릿](./claude-code-guide/08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/) - CLAUDE.md / PRD / architecture / erd / feature-spec
-- [04. 에이전트 협업](./claude-code-guide/08-바이브코딩(vibe-coding)/04-에이전트협업(agents)/) - 멀티 에이전트 패턴, 4-role 협업, 크로스 에이전트 핸드오프, **인기 에이전트 레포 비교·선택 가이드**, **작업별 복붙 예제 48종**
-- [05. 엔드투엔드 예제](./claude-code-guide/08-바이브코딩(vibe-coding)/05-예제(examples)/) - 기능 개발 + 멀티 에이전트 파이프라인 실사례
-
-→ 시작하려면 **[08-바이브코딩/01-빠른시작](./claude-code-guide/08-바이브코딩(vibe-coding)/01-빠른시작(quickstart).md)** 5분 가이드.
-
-### 99. 부록
-- [CLI 레퍼런스](./claude-code-guide/99-부록(appendix)/01-CLI레퍼런스(cli-reference).md) - 명령어, 플래그, 환경변수 전체 목록
-- [문제 해결](./claude-code-guide/99-부록(appendix)/02-문제해결(troubleshooting).md) - 자주 발생하는 오류와 해결법
-- [용어집](./claude-code-guide/99-부록(appendix)/03-용어집(glossary).md) - Claude Code 관련 용어 정리
-- [FAQ](./claude-code-guide/99-부록(appendix)/04-FAQ(faq).md) - 자주 묻는 질문과 답변
-- [팁 30선](./claude-code-guide/99-부록(appendix)/05-팁모음(tips).md) - 알아두면 좋은 실전 팁 모음
+# Claude가 프로젝트를 분석하고 상세히 설명합니다
+```
 
 ---
 
-## Claude Code 구독 요구사항
+## 주요 기능 요약
+
+| 기능 | 설명 |
+|------|------|
+| **에이전틱 코딩** | 자연어로 지시하면 스스로 계획을 세우고 코드를 작성, 오류 시 자율 디버깅 |
+| **멀티 파일 편집** | 프로젝트 구조를 이해하고 여러 파일을 동시에 수정 |
+| **Git 통합** | 커밋 메시지 생성, 브랜치 관리, PR 작성, 코드 리뷰 |
+| **터미널 접근** | 셸 명령어 실행, 테스트·빌드·린팅 자동화 |
+| **코드베이스 이해** | 전체 구조 파악, 의존 관계·데이터 흐름 분석, 온보딩 도우미 |
+
+---
+
+## 빠른 시작: 3단계
+
+### Step 1: 설치
+
+```bash
+# Node.js 18 이상이 설치되어 있어야 합니다
+npm install -g @anthropic-ai/claude-code
+```
+
+### Step 2: 인증
+
+```bash
+# 프로젝트 디렉토리에서 Claude Code 실행
+cd your-project
+claude
+
+# 처음 실행 시 인증 과정이 자동으로 시작됩니다
+# - Anthropic API 키 입력, 또는
+# - Claude 구독(Max, Team, Enterprise)으로 OAuth 로그인
+```
+
+### Step 3: 코딩 시작
+
+```bash
+# 자연어로 원하는 작업을 요청합니다
+> 이 프로젝트의 구조를 설명해줘
+> login 함수에 입력값 검증을 추가해줘
+> 최근 커밋의 변경사항을 요약하고 커밋 메시지를 작성해줘
+```
+
+> **팁**: 처음에는 간단한 질문(프로젝트 구조 설명, 함수 역할 설명 등)부터 시작하세요. Claude Code의 동작 방식에 익숙해진 후 복잡한 작업을 요청하면 더 효과적입니다.
+
+---
+
+## 구독 요구사항
 
 Claude Free/Pro 구독으로도 Claude Code를 사용할 수 있습니다.
 
@@ -106,32 +71,166 @@ Claude Free/Pro 구독으로도 Claude Code를 사용할 수 있습니다.
 | Desktop 앱 | ❌ | ✅ | ✅ |
 | Web (claude.ai/code) | ❌ | ✅ | ✅ |
 
-### 핵심 포인트
-
-1. **무료 사용자**: Terminal CLI와 VS Code 확장에서 사용 가능
-2. **Pro 구독자** ($20/월): 모든 기능 사용 가능 (Desktop, Web 포함)
-3. **API 키 방식**: Claude 구독과 별개로 API 키로도 사용 가능 (이 경우 토큰당 비용 청구, 평균 $100-200/월)
+- **무료 사용자**: Terminal CLI와 VS Code 확장에서 사용 가능
+- **Pro 구독자** ($20/월): 모든 기능 사용 가능 (Desktop, Web 포함)
+- **API 키 방식**: Claude 구독과 별개로 API 키로도 사용 가능 (토큰당 비용 청구, 평균 $100-200/월)
 
 > Claude Pro 구독이 있으면 별도 API 비용 없이 Claude Code를 사용할 수 있습니다.
 
 ---
 
-## 빠른 시작
+## 이 가이드의 대상
 
-```bash
-# 1. 설치
-npm install -g @anthropic-ai/claude-code
+| 대상 | 이 가이드에서 얻을 수 있는 것 |
+|------|-------------------------------|
+| **AI 코딩 도구 입문자** | Claude Code의 기본 개념부터 실전 활용까지 단계별 학습 |
+| **기존 IDE AI 도구 사용자** | CLI 기반 에이전틱 코딩의 장점과 활용법 |
+| **팀 리더 / 매니저** | Claude Code 도입 시 고려사항, 팀 워크플로우 설계 |
+| **숙련된 개발자** | 고급 최적화 기법, 자동화 워크플로우 구축 |
 
-# 2. 프로젝트 디렉토리로 이동
-cd your-project
+### 사전 지식
 
-# 3. Claude Code 실행
-claude
-```
+- **필수**: 터미널(명령줄) 기본 사용법, Git 기초
+- **권장**: JavaScript/Python 등 프로그래밍 언어 경험
+- **선택**: CI/CD, Docker 등 DevOps 기초 지식
+
+---
+
+## 가이드 사용법
+
+이 가이드는 두 가지 읽기 경로를 지원합니다.
+
+| 사용 방식 | 보는 곳 |
+|---------|--------|
+| "이 기능이 뭔지" 알고 싶다 | 01~07 (레퍼런스 + 개념) |
+| "내일 출근해서 뭐부터 할지" 알고 싶다 | **04-워크플로우 07~11** (흐름도 + 복붙 템플릿 + 실전 예제) |
+
+### 추천 학습 순서
+
+1. **입문자**: `01` → `02` → `03` 순서대로 읽기
+2. **경험자**: `03` 또는 `04`부터 시작
+3. **특정 주제 탐색**: 아래 목차에서 필요한 섹션으로 바로 이동
+
+---
+
+## 목차
+
+### 01. 설치
+- [시스템 요구사항](./01-설치(installation)/01-시스템요구사항(requirements).md) - OS, Node.js, 하드웨어, 네트워크, 인증
+- [OS별 설치 가이드](./01-설치(installation)/02-설치가이드(install-guide).md) - macOS, Linux, Windows 설치 방법
+- [첫 실행 및 초기 설정](./01-설치(installation)/03-첫실행(first-run).md) - 인증, 기본 설정, 첫 대화
+
+### 02. 핵심 개념
+- [대화와 세션](./02-핵심개념(core-concepts)/01-대화와세션(conversation).md) - 대화 흐름, 세션 관리, 컨텍스트
+- [도구 시스템](./02-핵심개념(core-concepts)/02-도구시스템(tools).md) - 파일 편집, Bash 실행, 검색 도구
+- [권한 시스템](./02-핵심개념(core-concepts)/03-권한시스템(permissions).md) - 권한 모드, 허용 목록, 보안 설정
+- [컨텍스트 관리](./02-핵심개념(core-concepts)/04-컨텍스트관리(context-management).md) - 토큰 관리, 컴팩션, 최적화
+- [시스템 프롬프트](./02-핵심개념(core-concepts)/05-시스템프롬프트(system-prompt).md) - 시스템 프롬프트 구조, 커스터마이징
+
+### 03. 주요 기능
+- [메모리 (CLAUDE.md)](./03-주요기능(features)/01-메모리(memory).md) - 프로젝트 설정, 계층 구조, 작성법
+- [스킬 (Skills)](./03-주요기능(features)/02-스킬(skills).md) - 슬래시 명령어, 커스텀 스킬
+- [훅 (Hooks)](./03-주요기능(features)/03-훅(hooks).md) - 이벤트 기반 자동화, 커스텀 훅
+- [MCP 서버](./03-주요기능(features)/04-MCP서버(mcp-servers).md) - 외부 도구 연동, MCP 설정
+- [서브에이전트](./03-주요기능(features)/05-서브에이전트(subagents).md) - 병렬 처리, 멀티 에이전트
+- [IDE 통합](./03-주요기능(features)/06-IDE통합(ide-integration).md) - VS Code, JetBrains 연동
+- [Web & Desktop](./03-주요기능(features)/07-웹데스크톱(web-desktop).md) - Web, Desktop 앱, VS Code 확장 사용법
+
+### 04. 워크플로우
+**개념 (Claude Code의 워크플로우 기초)**
+- [코드 분석](./04-워크플로우(workflows)/01-코드분석(analysis).md) - 코드베이스 이해, 구조 분석
+- [코딩](./04-워크플로우(workflows)/02-코딩(coding).md) - 기능 개발, 코드 생성
+- [디버깅](./04-워크플로우(workflows)/03-디버깅(debugging).md) - 버그 추적, 오류 해결
+- [리팩토링](./04-워크플로우(workflows)/04-리팩토링(refactoring).md) - 코드 개선, 구조 변경
+- [Git 워크플로우](./04-워크플로우(workflows)/05-Git워크플로우(git-workflow).md) - 커밋, PR, 코드 리뷰
+- [Git 기본사용법](./04-워크플로우(workflows)/06-Git기본사용법(git-basics).md) - Git 기초, 명령어, 상황별 Git Flow
+
+**실전 플레이북 (흐름도 + 프롬프트 템플릿 + 실전 예제)**
+- [프로젝트 초기화](./04-워크플로우(workflows)/00-프로젝트초기화(project-init).md) - 30분 안에 바이브 코딩 루프 가동
+- [기능 개발 흐름](./04-워크플로우(workflows)/07-기능개발흐름(feature-flow).md) - 8단계, 템플릿, 즐겨찾기 실전 예제
+- [버그 수정 흐름](./04-워크플로우(workflows)/08-버그수정흐름(bugfix-flow).md) - 재현→원인→최소 패치, 2단계 프롬프트
+- [리팩토링 흐름](./04-워크플로우(workflows)/09-리팩토링흐름(refactoring-flow).md) - 보존 규칙 + 단계 분할 + 프롬프트
+- [스키마 변경 흐름](./04-워크플로우(workflows)/10-스키마변경흐름(schema-flow).md) - Expand-Contract + 호환성 판단표
+- [UI 구현 흐름](./04-워크플로우(workflows)/11-UI구현흐름(ui-flow).md) - 텍스트 와이어프레임 + 접근성 템플릿
+
+### 05. 기술 스택별 활용
+- [프론트엔드](./05-기술스택(tech-stacks)/01-프론트엔드(frontend).md) - React, Vue, Angular, Next.js
+- [백엔드](./05-기술스택(tech-stacks)/02-백엔드(backend).md) - Node.js, Python, Java, Go
+- [모바일](./05-기술스택(tech-stacks)/03-모바일(mobile).md) - React Native, Flutter, Swift, Kotlin
+- [인프라](./05-기술스택(tech-stacks)/04-인프라(infra).md) - Docker, Kubernetes, Terraform, CI/CD
+
+### 06. AI 코딩 도구 비교
+- [vs GitHub Copilot](./06-비교(comparison)/01-GitHub-Copilot비교(vs-github-copilot).md)
+- [vs Cursor](./06-비교(comparison)/02-Cursor비교(vs-cursor).md)
+- [vs Windsurf](./06-비교(comparison)/03-Windsurf비교(vs-windsurf).md)
+- [도구 선택 가이드](./06-비교(comparison)/04-선택가이드(selection-guide).md)
+- [크로스 도구 핸드오프](./06-비교(comparison)/05-크로스도구핸드오프(cross-tool-handoff).md) - 도구 전환 시 컨텍스트 유지 프로토콜
+
+### 07. 최적화
+- [프롬프트 엔지니어링](./07-최적화(optimization)/01-프롬프트엔지니어링(prompt-engineering).md) - 효과적인 지시 방법
+- [CLAUDE.md 작성법 및 템플릿](./07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md) - 작성 원칙 + 프로젝트별 실전 템플릿
+- [성능 및 비용 최적화](./07-최적화(optimization)/03-성능최적화(performance).md) - 속도·정확도 개선 + 토큰 절약·비용 관리
+- [문서 종류 분류](./07-최적화(optimization)/04-문서종류분류(document-types).md) - 필수 4종 / 권장 3종 / 불필요 5종
+- [에이전트 친화 포맷](./07-최적화(optimization)/05-에이전트친화포맷(agent-friendly-formats).md) - Markdown + Mermaid 원칙 + 문서 종류별 포맷 매칭표
+
+### 99. 부록
+- [CLI 레퍼런스](./99-부록(appendix)/01-CLI레퍼런스(cli-reference).md) - 명령어, 플래그, 환경변수 전체 목록
+- [문제 해결](./99-부록(appendix)/02-문제해결(troubleshooting).md) - 자주 발생하는 오류와 해결법
+- [용어집](./99-부록(appendix)/03-용어집(glossary).md) - Claude Code 관련 용어 정리
+- [FAQ](./99-부록(appendix)/04-FAQ(faq).md) - 자주 묻는 질문과 답변
+- [팁 30선](./99-부록(appendix)/05-팁모음(tips).md) - 알아두면 좋은 실전 팁 모음
+- [인기 에이전트 레포](./99-부록(appendix)/06-에이전트레포(agent-repos).md) - 8개 레포 비교·선택 가이드
+- [에이전트 작업별 예제](./99-부록(appendix)/07-에이전트예제(agent-examples).md) - 8레포 × 6시나리오 = 48종 복붙 예제
+
+---
+
+## 핵심 용어 빠른 참조
+
+| 용어 | 설명 |
+|------|------|
+| **에이전틱 코딩 (Agentic Coding)** | AI가 자율적으로 판단하고 여러 단계를 거쳐 코딩 작업을 수행하는 방식 |
+| **CLI (Command Line Interface)** | 터미널/명령줄에서 텍스트 명령어로 상호작용하는 인터페이스 |
+| **프롬프트 (Prompt)** | Claude에게 전달하는 지시 또는 요청 텍스트 |
+| **컨텍스트 (Context)** | Claude가 현재 대화에서 참조할 수 있는 정보의 범위 |
+| **컨텍스트 윈도우 (Context Window)** | Claude가 한 번에 처리할 수 있는 최대 정보량 (토큰 수) |
+| **CLAUDE.md** | 프로젝트 루트에 놓는 설정 파일. 프로젝트 규칙, 코딩 스타일 등을 지정 |
+| **슬래시 명령어 (Slash Command)** | `/help`, `/clear` 등 `/`로 시작하는 내장 명령어 |
+| **권한 모드 (Permission Mode)** | 파일 수정, 명령어 실행 시 사용자 승인 수준 설정 |
+| **토큰 (Token)** | AI 모델의 텍스트 처리 최소 단위 (한국어 1글자 ≈ 2-3 토큰) |
+| **MCP (Model Context Protocol)** | 외부 도구 및 데이터 소스를 Claude에 연결하는 프로토콜 |
 
 ---
 
 ## 문서 구조 변경 이력
+
+### 2026-04-14: 08-바이브코딩 폴더 통합 해체
+
+`08-바이브코딩(vibe-coding)/` 폴더의 26개 파일(5,838줄)을 01~07 + 99 폴더로 재배치하고 폴더를 삭제했습니다.
+
+| 변경 | 내용 |
+|------|------|
+| **프롬프트 템플릿 7종** | 04-워크플로우의 각 흐름 문서(07~11) + 코드분석(01) + Git워크플로우(05)에 병합 |
+| **범용 템플릿 + 6대 원칙** | 07-최적화/01-프롬프트엔지니어링에 병합 |
+| **문서 템플릿 5종** | CLAUDE.template → 07-02, PRD/arch/erd/feature-spec → 07-04 |
+| **에이전트 협업 3종** | 패턴 + 역할 + 예제 → 03-05-서브에이전트에 통합 |
+| **크로스 핸드오프** | 06-비교/05-크로스도구핸드오프 신규 |
+| **에이전트 레포·예제** | 99-부록/06, 07 신규 (627줄 + 2003줄) |
+| **빠른 시작** | 04-워크플로우/00-프로젝트초기화 신규 |
+| **기능개발 예제** | 04-워크플로우/07-기능개발흐름에 병합 |
+| **멀티에이전트 예제** | 03-주요기능/05-서브에이전트에 병합 |
+
+### 2026-04-13: 디렉토리 평탄화, 중복 정리, 구조 개선
+
+- `claude-code-guide/` 하위 구조를 프로젝트 루트로 이동
+- 루트 `00-개요(overview).md` 내용을 `README.md`에 통합 후 삭제
+- `08-바이브코딩/00-개요(overview).md` → `08-바이브코딩/README.md`에 병합
+- `07-최적화/03-성능최적화` §2 컨텍스트 관리 중복 축소 → `02-핵심개념/04-컨텍스트관리` 링크로 대체
+- `07-최적화` 파일 리넘버링: `06-문서종류분류` → `04`, `07-에이전트친화포맷` → `05`
+- `99-부록/05-팁모음` 세션관리 항목 축소 + 성능최적화 링크 추가
+- `08-바이브코딩/02-프롬프트템플릿/README` 6섹션 설명 축소 + 프롬프트엔지니어링 링크
+- `06-비교/README.md` 네비게이션 허브 신규 생성
+- 구 경로 `claude-code-guide/` 참조 6건 수정 (quickstart, 문서템플릿 README, 인기에이전트레포)
+- CLAUDE.md SSOT 테이블에 "컨텍스트 윈도우 관리" 정본 추가
 
 ### 2026-04-12: 중복·통합 정리
 
@@ -146,15 +245,6 @@ claude
 | **Git 문서 분리** | `06-Git기본사용법`을 순수 Git 레퍼런스로, Claude Code 프롬프트는 `05-Git워크플로우`로 일원화 |
 | **04↔08 중복 정리** | 워크플로우 플레이북(08~11)의 상세 예시 축약, `08-바이브코딩` 프롬프트 템플릿 링크로 대체 |
 | **CLAUDE.md 일원화** | 9곳에 산재한 CLAUDE.md 설명을 `03-01-메모리` + `07-02-작성법`으로 정본 지정, 나머지 축약+링크 |
-
----
-
-## 대상 독자
-
-- Claude Code를 처음 사용하는 개발자
-- AI 코딩 도구를 비교하고 선택하려는 개발자
-- Claude Code를 더 효율적으로 활용하고 싶은 개발자
-- 한국어로 된 체계적인 가이드가 필요한 개발자
 
 ---
 

@@ -387,5 +387,5 @@ src/components/
 ## 관련 문서
 
 - **실전 플레이북 (단계별 체크리스트)**: [07-기능개발흐름](./07-기능개발흐름(feature-flow).md)
-- **재사용 프롬프트 템플릿**: [08-바이브코딩/02-프롬프트템플릿/01-기능개발](../08-바이브코딩(vibe-coding)/02-프롬프트템플릿(prompts)/01-기능개발(feature).md)
-- **feature-spec 템플릿**: [08-바이브코딩/03-문서템플릿/feature-spec.template.md](../08-바이브코딩(vibe-coding)/03-문서템플릿(templates)/feature-spec.template.md)
+- **재사용 프롬프트 템플릿**: [07-기능개발흐름 §프롬프트 템플릿](./07-기능개발흐름(feature-flow).md#프롬프트-템플릿)
+- **feature-spec 템플릿**: [07-최적화/04-문서종류분류 §Feature Spec](../07-최적화(optimization)/04-문서종류분류(document-types).md)
