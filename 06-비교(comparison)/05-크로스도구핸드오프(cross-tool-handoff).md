@@ -1,4 +1,4 @@
-# 03. 크로스 에이전트 핸드오프 (Cross-Agent Handoff)
+# 05. 크로스 도구 핸드오프 (Cross-Tool Handoff)
 
 > Claude Code만 쓰는 경우는 드물다. 실무에선 Cursor / GPT Codex / Aider / Windsurf 와 병용한다. 도구가 바뀌어도 **컨텍스트가 보존**되어야 한다.
 
@@ -57,6 +57,8 @@ cp CLAUDE.md CONVENTIONS.md
 
 pre-commit 훅에 걸면 드리프트 방지.
 
+> **CLAUDE.md 작성법 상세**는 [CLAUDE.MD 작성법](../07-최적화(optimization)/02-CLAUDE-MD작성법(claude-md).md)을 참고하세요.
+
 ---
 
 ## 세션 간 핸드오프 노트
@@ -105,6 +107,8 @@ docs/handoff/<YYYY-MM-DD>-<slug>.md
 `git diff main...HEAD` 또는 브랜치 `feat/favorites`
 ```
 
+> **문서 템플릿 종류 분류**는 [문서종류분류](../07-최적화(optimization)/04-문서종류분류(document-types).md)를 참고하세요.
+
 ### 사용법
 1. 한 도구에서 작업 마무리할 때 이 파일 작성
 2. 커밋에 함께 포함
@@ -141,6 +145,10 @@ docs/handoff/<YYYY-MM-DD>-<slug>.md
 | Aider | 커밋 단위 작업, 명확한 diff | UI 없음 | Coder (CLI 선호 시) |
 
 **고정 배분은 아닙니다.** 같은 도구로도 세션을 나누면 역할 분리 가능.
+
+> **역할 기반 에이전트 분업 패턴**은 [서브에이전트](../03-주요기능(features)/05-서브에이전트(subagents).md)를 참고하세요.
+
+> **도구별 비교 및 선택 기준**은 [선택가이드](04-선택가이드(selection-guide).md)를 참고하세요.
 
 ---
 

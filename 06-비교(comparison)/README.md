@@ -10,6 +10,7 @@
 | [02-Cursor 비교](./02-Cursor비교(vs-cursor).md) | Cursor의 고유 강점과 Claude Code와의 차이 |
 | [03-Windsurf 비교](./03-Windsurf비교(vs-windsurf).md) | Windsurf의 고유 강점과 Claude Code와의 차이 |
 | [04-선택가이드](./04-선택가이드(selection-guide).md) | 상황·목적·환경별 도구 선택 의사결정 가이드 |
+| [05-크로스 도구 핸드오프](./05-크로스도구핸드오프(cross-tool-handoff).md) | 도구 전환 시 컨텍스트 유지 프로토콜 |
 
 ## 읽는 순서
 
