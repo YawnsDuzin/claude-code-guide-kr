@@ -103,7 +103,7 @@ Claude Free/Pro 구독으로도 Claude Code를 사용할 수 있습니다.
 | 사용 방식 | 보는 곳 |
 |---------|--------|
 | "이 기능이 뭔지" 알고 싶다 | 01~07 (레퍼런스 + 개념) |
-| "내일 출근해서 뭐부터 할지" 알고 싶다 | **04-워크플로우 07~11** (흐름도 + 복붙 템플릿 + 실전 예제) |
+| "내일 출근해서 뭐부터 할지" 알고 싶다 | **04-워크플로우 00, 07~11** (흐름도 + 복붙 템플릿 + 실전 예제) |
 
 ### 추천 학습 순서
 
@@ -133,7 +133,7 @@ Claude Free/Pro 구독으로도 Claude Code를 사용할 수 있습니다.
 - [훅 (Hooks)](./03-주요기능(features)/03-훅(hooks).md) - 이벤트 기반 자동화, 커스텀 훅
 - [MCP 서버](./03-주요기능(features)/04-MCP서버(mcp-servers).md) - 외부 도구 연동, MCP 설정
 - [서브에이전트](./03-주요기능(features)/05-서브에이전트(subagents).md) - 병렬 처리, 멀티 에이전트
-- [IDE 통합](./03-주요기능(features)/06-IDE통합(ide-integration).md) - VS Code, JetBrains 연동
+- [IDE 통합](./03-주요기능(features)/06-IDE통합(ide-integration).md) - VS Code 연동
 - [Web & Desktop](./03-주요기능(features)/07-웹데스크톱(web-desktop).md) - Web, Desktop 앱, VS Code 확장 사용법
 
 ### 04. 워크플로우
@@ -165,6 +165,7 @@ Claude Free/Pro 구독으로도 Claude Code를 사용할 수 있습니다.
 - [vs Windsurf](./06-비교(comparison)/03-Windsurf비교(vs-windsurf).md)
 - [도구 선택 가이드](./06-비교(comparison)/04-선택가이드(selection-guide).md)
 - [크로스 도구 핸드오프](./06-비교(comparison)/05-크로스도구핸드오프(cross-tool-handoff).md) - 도구 전환 시 컨텍스트 유지 프로토콜
+- [비교 섹션 안내](./06-비교(comparison)/README.md) - 네비게이션 허브
 
 ### 07. 최적화
 - [프롬프트 엔지니어링](./07-최적화(optimization)/01-프롬프트엔지니어링(prompt-engineering).md) - 효과적인 지시 방법
