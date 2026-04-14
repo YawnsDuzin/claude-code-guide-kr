@@ -493,7 +493,7 @@ erDiagram
 
 ### 추가 트리거
 
-- **feature-spec**: P0/P1 기능 작업을 시작할 때마다 1개 (작업 끝나면 `[Done]` 표시 후 보존)
+- **feature-spec**: P0/P1 기능 작업을 시작할 때마다 1개 (작업 끝나면 `[Done]` 표시 후 보존). Done 후에도 삭제하지 않는다 — 회고/재작업 시 참조. 6개월 이상 지난 Done 파일은 `docs/features/archive/`로 이동 가능.
 - **ADR**: 라이브러리 선택, 패턴 결정, 트레이드오프가 있는 모든 결정. 5분 안에 적을 수 있는 짧은 형식
 - **handoff**: Claude Code → Cursor 전환 / 세션 종료 시 다음 세션 위한 짧은 메모
 
@@ -684,6 +684,56 @@ erDiagram
 
 </details>
 
+### R3. Handoff 노트 템플릿
+
+<details><summary>📋 템플릿 보기</summary>
+
+````markdown
+# Handoff — <YYYY-MM-DD> <슬러그>
+
+> 도구/세션 전환 시 다음 세션이 "0부터 파악"하지 않도록 넘기는 짧은 메모.
+> 경로: `docs/handoff/YYYY-MM-DD-<slug>.md`
+
+**출발**: `<이전 도구/세션 — 예: Claude Code 세션 #42>`
+**도착**: `<다음 도구/세션 — 예: Cursor, 또는 내일 새 Claude Code 세션>`
+
+---
+
+## 1. 현재 상태
+
+| 구분 | 내용 |
+|------|------|
+| 완료 | <예: favorite API 3개 + 단위 테스트 통과> |
+| 진행 중 | <예: FavoriteButton 컴포넌트 — 낙관적 업데이트 미완> |
+| 막힌 것 | <예: Supabase RLS 정책이 로컬에서 작동 안 함> |
+
+---
+
+## 2. 다음 세션이 해야 할 일
+
+1. <예: FavoriteButton 낙관적 업데이트 완성>
+2. <예: Supabase RLS 로컬 환경 디버그>
+3. <예: E2E 테스트 1건 추가>
+
+---
+
+## 3. 주의사항
+
+- <예: `src/hooks/use-favorite.ts` 에 임시 하드코딩 있음 — TODO(#78) 표시>
+- <예: DB 마이그레이션 0003 은 아직 staging 미적용>
+- <예: `.env.local` 에 테스트용 Supabase 키 — 프로덕션 키 아님>
+
+---
+
+## 4. 참조 파일
+
+- `planning/favorites.md`
+- `docs/features/favorites.md`
+- `docs/erd.md` §favorite
+````
+
+</details>
+
 ### ADR 미니 템플릿
 ```markdown
 # ADR-0042: tRPC 채택
@@ -722,6 +772,8 @@ tRPC 채택. REST + OpenAPI 대신.
 - **"우리는 외부 API 제공자라 명세서가 필요해요"** → D2 예외. 단, **자동 생성** 만 허용.
 - **"규제 산업이라 ADR이 의무"** → R2가 의무로 격상. 양식만 강제, 분량은 그대로 짧게.
 - **"오픈소스 라이브러리라 사용 가이드 필요"** → D5 예외. 단, README + examples 디렉토리로 통합.
+- **"오픈소스 라이브러리라 CHANGELOG가 필요해요"** → D4 예외. 단, `standard-version` / `changesets` 등 **자동 생성** 도구 사용. 손으로 쓰지 않는다.
+- **"온보딩용으로 핵심 흐름 다이어그램이 필요해요"** → D3 예외. 단, architecture.md 안에 **핵심 1~2개만** 포함. 별도 파일로 분리하지 않는다.
 
 ---
 
