@@ -12,6 +12,7 @@ All content is organized into numbered sections at the project root:
 
 - **01-07**: Reference material + practical playbooks (installation, core concepts, features, workflows with prompt templates, tech stacks, tool comparisons, optimization with document templates)
 - **99-부록(appendix)**: CLI reference, troubleshooting, glossary, FAQ, tips, agent repos, agent examples
+- **_docs/**: 날짜별 작업 프롬프트 로그 (`YYYYMMDD_prompt.md`). 각 세션에서 사용한 프롬프트와 지시 기록용.
 
 ### Merged/Deleted Files
 
